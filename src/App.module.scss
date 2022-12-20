@@ -1,3 +1,6 @@
+@import './variables';
+
 .title {
-    color: red;
+    color: $gray-text;
+    font-family: $ubuntu;
 }
