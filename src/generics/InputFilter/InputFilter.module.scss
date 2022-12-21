@@ -1,0 +1,105 @@
+@import '../../variables.scss';
+
+$hover: #acb6d1;
+$hoverChecked: #044aa5;
+
+.container, .inputFilter, .inputLabel, .countSpan {
+    box-sizing: border-box;
+}
+
+.container {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    font-family: $montserrat;
+    font-size: 18px;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.inputFilter {
+    appearance: none;
+    cursor: pointer;
+    height: 15px;
+    margin-right: 8px;
+    position: relative;
+    width: 15px;
+
+    &::before {
+        border: 2px solid $gray-blue-bg;
+        border-radius: 5px;
+        background: $white-bg;
+        content: '';
+        display: block;
+        height: 15px;
+        position: absolute;
+        margin: 0;
+        left: -2px;
+        top: -2px;
+        width: 15px;
+        transition: all 0.15s ease-in-out;
+    }
+
+    &:checked::before {
+        border: 2px solid $blue-bg;
+        border-radius: 5px;
+        background: $blue-bg;
+        content: '';
+        display: block;
+        height: 15px;
+        position: absolute;
+        margin: 0;
+        left: -2px;
+        top: -2px;
+        width: 15px;
+        z-index: 1;
+    }
+
+    &:checked::after {
+        border: solid $white-bg;
+        border-width: 0 2px 2px 0;
+        background: transparent;
+        content: '';
+        display: block;
+        height: 10px;
+        left: 4px;
+        position: absolute;
+        top: 0px;
+        transform: rotate(45deg);
+        width: 5px;
+        z-index: 2;
+    }
+
+    &::after {
+        border: solid $white-bg;
+        border-width: 0 2px 2px 0;
+        background: transparent;
+        content: '';
+        display: block;
+        height: 10px;
+        left: 4px;
+        position: absolute;
+        top: 0px;
+        transform: rotate(45deg);
+        width: 5px;
+        z-index: 2;
+    }
+
+    &:hover::before {
+        border-color: $hover;
+    }
+
+    &:checked:hover::before {
+        border-color: $hoverChecked;
+        background-color: $hoverChecked;
+    }
+}
+
+.inputLabel {
+    color: $black-text;
+    cursor: pointer;
+}
+
+.countSpan {
+    margin-left: auto;
+}
