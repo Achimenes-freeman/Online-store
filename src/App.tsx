@@ -1,7 +1,8 @@
-import styles from './App.module.scss';
+// import styles from './App.module.scss';
+import SortInput from './generics/SortInput/SortInput';
 
 function App() {
-    return <h1 className={styles.title}>hello</h1>;
+    return <SortInput />;
 }
 
 export default App;
