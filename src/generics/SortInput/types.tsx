@@ -1,3 +1,3 @@
 export type SortInputProps = {
-    callback: (event: React.ChangeEvent) => void;
+    callback: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 };
