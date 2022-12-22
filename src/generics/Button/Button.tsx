@@ -1,5 +1,5 @@
 import styles from './Button.module.scss';
-import { GenericButton } from '../../types/types';
+import { GenericButton } from './types';
 
 function Button({ text, ...props }: GenericButton) {
     return (
