@@ -8,7 +8,7 @@
     border: none;
     cursor: pointer;
     outline: none;
-    background-color: $white-bg;
+    background-color: $white;
     transition: all 0.2s ease-in-out;
 
     &:hover {
@@ -35,12 +35,9 @@
         width: 30px;
         border-radius: 20px;
         background: $red-bg;
-        color: $white-text;
+        color: $white;
         font-family: $ubuntu;
         font-weight: 500;
         font-size: 13px;
-    }
-    &Hidden {
-        display: none;
     }
 }
