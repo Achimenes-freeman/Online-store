@@ -1,7 +1,8 @@
-import styles from './App.module.scss';
+// import styles from './App.module.scss';
+import ProductPage from './components/ProductPage/ProductPage';
 
 function App() {
-    return <h1 className={styles.title}>hello</h1>;
+    return <ProductPage productId={2} />;
 }
 
 export default App;

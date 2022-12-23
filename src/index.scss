@@ -1,4 +1,11 @@
 @import './variables';
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 html {
     font-size: 16px;
@@ -9,6 +16,10 @@ body {
     font-family: $ubuntu;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+    height: 100vh;
 }
 
 code {
