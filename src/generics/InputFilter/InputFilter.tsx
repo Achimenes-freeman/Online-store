@@ -1,5 +1,5 @@
-import { GenericInputFilter } from "./InputFilterType";
-import styles from "./InputFilter.module.scss"
+import { GenericInputFilter } from "./types";
+import styles from "./styles.module.scss"
 
 export default function InputFilter({text, count, totalCount, callback}: GenericInputFilter) {
     return(
