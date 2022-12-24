@@ -2,7 +2,7 @@ import Cart from '../../generics/Cart/Cart';
 import styles from './styles.module.scss';
 import { HeaderType } from './types';
 
-export default function Header({productsCount, productsTotalPrice}:HeaderType) {
+export default function Header({productsCount, productsTotalPrice, logoCallback, cartCallback}:HeaderType) {
     let totalCount: string | number;
     if(productsTotalPrice) {
         totalCount = productsTotalPrice;
@@ -17,12 +17,12 @@ export default function Header({productsCount, productsTotalPrice}:HeaderType) {
     return (
         <header className={styles.header}>
             <div className={styles.container}>
-                <button type='button' className={styles.headerLogo}>
+                <button type='button' className={styles.headerLogo} onClick={logoCallback}>
                     <span className={styles.headerLogoSpan1}>Online</span>
                     <span className={styles.headerLogoSpan2}>Store</span>
                 </button>
                 <div className={styles.cartTotal}>Total Count: <span className={styles.cartTotalSpan}>€{totalCount}</span></div>
-                <Cart productsAmount={productsCount}/>
+                <Cart productsAmount={productsCount} callback={cartCallback} />
             </div>
         </header>
     )
