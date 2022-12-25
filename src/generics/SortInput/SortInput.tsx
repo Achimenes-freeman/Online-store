@@ -1,4 +1,4 @@
-import styles from './SortInput.module.scss';
+import styles from './styles.module.scss';
 import { SortInputProps } from './types';
 
 function SortInput({ callback }: SortInputProps) {
