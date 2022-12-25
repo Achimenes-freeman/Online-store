@@ -1,6 +1,7 @@
 @import './variables';
 
-.title {
-    color: $gray-text;
-    font-family: $ubuntu;
+.App {
+    background-color: $gray-blue-bg;
+    width: 100%;
+    height: 100vh;
 }
