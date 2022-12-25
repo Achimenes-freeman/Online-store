@@ -2,6 +2,7 @@ import ClassNames from 'classnames';
 
 import ProductImages from '../ProductImages/ProductImages';
 
+import Button from '../../generics/Button/Button';
 import { IProductData } from '../ProductPage/types';
 
 import styles from './style.module.scss';
@@ -77,8 +78,15 @@ function Product(props: IProductData) {
                     </div>
                 </div>
 
-                <div className={styles.ProductInfoContainer}>
+                <div
+                    className={ClassNames(
+                        styles.ProductInfoContainer,
+                        styles.ProductPrice
+                    )}
+                >
                     <p className={styles.ProductInfoPrice}>{price}$</p>
+                    <Button text="by now" />
+                    <Button text="add to cart" isReverse />
                 </div>
             </div>
         </div>

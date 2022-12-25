@@ -10,7 +10,7 @@
     padding: 50px 30px;
     border-radius: 10px;
 
-    background-color: $white-bg;
+    background-color: $white;
 
     &Info {
         flex-grow: 1;
@@ -41,9 +41,7 @@
             font-weight: 700;
             font-size: 2.6rem;
             color: $blue-bg;
-        }
-
-        &Discount {
+            margin-right: 20px;
         }
 
         &Container {
@@ -85,6 +83,10 @@
                 }
             }
         }
+    }
+
+    &Price {
+        align-items: center;
     }
 
     &Presentation {
