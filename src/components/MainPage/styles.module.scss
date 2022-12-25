@@ -1,0 +1,129 @@
+@import '../../variables.scss';
+
+.mainPage,
+.wrapper,
+.filtersContainer,
+.productsContainer, 
+.productsUIBar {
+    box-sizing: border-box;
+}
+
+.mainPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+    background-color: $gray-blue-bg;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1600px;
+    gap: 50px;
+}
+
+.filtersContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+    width: 400px;
+    border: 1px solid $blue-bg;
+    border-radius: 20px;
+    background-color: $white;
+    color: $black-text;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.products {
+    &Container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: calc(100vh - 200px);
+        width: 1150px;
+        gap: 15px;
+    }
+
+    &UIBar {
+        display: grid;
+        grid-template-areas: "search . . sort button";
+        grid-template-columns: 1fr;
+        gap: 15px;
+        height: 50px;
+        width: 100%;
+    }
+
+    &List {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 265px);
+        width: 100%;
+        border: 1px solid $blue-bg;
+        border-radius: 20px;
+        font-size: 24px;
+    }
+}
+
+.UIBar {
+    &ButtonsContainer {
+        grid-area: button;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 105px;
+    }
+
+    &Button {
+        height: 50px;
+        width: 50px;
+        padding: 0;
+        margin: 0;
+        border: 1px solid $blue-bg;
+        border-radius: 15px;
+        outline: none;
+        cursor: pointer;
+        background-color: $white;
+        font-family: $ubuntu;
+        font-size: 18px;
+    }
+}
+
+.Sort {
+    grid-area: sort;
+    height: 100%;
+    width: 275px;
+    padding-left: 10px;
+    padding-right: 0px;
+    border: 1px solid $blue-bg;
+    border-radius: 15px;
+    font-family: $ubuntu;
+    font-size: 24px;
+    outline: none;
+    cursor: pointer;
+
+    & > option {
+        font-size: 18px;
+        outline: none;
+    }
+}
+
+.Search {
+    grid-area: search;
+    height: 100%;
+    width: 350px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid $blue-bg;
+    border-radius: 15px;
+    color: $black-text;
+    font-family: $ubuntu;
+    font-size: 24px;
+    outline: none;
+}
