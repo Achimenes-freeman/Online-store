@@ -1,21 +1,13 @@
 import Cart from '../../generics/Cart/Cart';
+import formatTotalCount from './helpers';
 import styles from './styles.module.scss';
 import { HeaderType } from './types';
 
 export default function Header({productsCount, productsTotalPrice, logoCallback, cartCallback}:HeaderType) {
-    let totalCount: string | number;
-    if(productsTotalPrice) {
-        totalCount = productsTotalPrice;
-        if(productsTotalPrice >= 1000) {
-            totalCount = `${Math.round(productsTotalPrice / 100) / 10}K`
-        }
-        if(productsTotalPrice >= 1000000) {
-            totalCount = `${Math.round(productsTotalPrice / 10000) / 100}M`;
-        }
-    } else totalCount = 0;
+    const totalCount = formatTotalCount(productsTotalPrice);
 
     return (
-        <header className={styles.header}>
+        <header className={styles.Header}>
             <div className={styles.container}>
                 <button type='button' className={styles.headerLogo} onClick={logoCallback}>
                     <span className={styles.headerLogoSpan1}>Online</span>
