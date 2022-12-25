@@ -19,6 +19,7 @@
 .cartImg {
     display: block;
     width: 40px;
+    filter: drop-shadow(0 8px 3px $gray-blue-bg);
 }
 
 .cartAmount {
