@@ -11,18 +11,14 @@ function ProductImages(props: IProductImages) {
 
     return (
         <div className={styles.ProductImagesContainer}>
-            <div className={styles.ProductImageView}>
-                <img
-                    className={styles.ProductThumbnail}
-                    src={currentImage}
-                    alt=""
-                />
+            <div className={styles.view}>
+                <img className={styles.thumbnail} src={currentImage} alt="" />
             </div>
 
-            <div className={styles.ProductImagesSlides}>
+            <div className={styles.slides}>
                 {images.map((item) => (
                     <button
-                        className={styles.ProductImageContainer}
+                        className={styles.imageContainer}
                         type="button"
                         data-image={item}
                         onClick={(e) =>
@@ -31,11 +27,7 @@ function ProductImages(props: IProductImages) {
                             )
                         }
                     >
-                        <img
-                            className={styles.ProductImagesSlidesItem}
-                            src={item}
-                            alt=""
-                        />
+                        <img className={styles.slidesItem} src={item} alt="" />
                     </button>
                 ))}
             </div>

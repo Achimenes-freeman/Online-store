@@ -11,92 +11,91 @@
     border-radius: 10px;
 
     background-color: $white;
+}
+.price {
+    align-items: center;
+}
 
-    &Info {
-        flex-grow: 1;
-        height: 100%;
+.presentation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 45%;
+    padding: 20px 30px;
+    margin-right: 30px;
 
-        padding: 25px 30px;
+    border-radius: 10px;
+}
+.info {
+    flex-grow: 1;
+    height: 100%;
 
-        border-radius: 10px;
+    padding: 25px 30px;
 
-        &Title {
-            font-size: 3.6rem;
-            line-height: 1;
-        }
+    border-radius: 10px;
 
-        &Brand {
-            font-size: 1.8rem;
-            font-weight: 300;
-        }
+    &Title {
+        font-size: 3.6rem;
+        line-height: 1;
+    }
 
-        &Description {
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-            max-width: 70%;
-            font-weight: 300;
-        }
+    &Brand {
+        font-size: 1.8rem;
+        font-weight: 300;
+    }
 
-        &Price {
-            font-weight: 700;
-            font-size: 2.6rem;
-            color: $blue-bg;
-            margin-right: 20px;
-        }
-
-        &Container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-end;
-            margin-bottom: 20px;
-        }
-
-        &Name {
-            margin-bottom: 30px;
-            justify-content: space-between;
-        }
-
-        &RSC {
-            margin-bottom: 50px;
-            &Item {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-right: 50px;
-
-                &:last-child {
-                    margin-right: 0;
-                }
-            }
-
-            &Icon {
-                width: 20px;
-                height: 20px;
-                margin-right: 5px;
-            }
-
-            &Text {
-                font-weight: 700;
-                font-size: 1.2rem;
-                & span {
-                    font-weight: 400;
-                }
-            }
-        }
+    &Description {
+        margin-bottom: 20px;
+        font-size: 1.4rem;
+        max-width: 70%;
+        font-weight: 300;
     }
 
     &Price {
-        align-items: center;
+        font-weight: 700;
+        font-size: 2.6rem;
+        color: $blue-bg;
+        margin-right: 20px;
     }
 
-    &Presentation {
+    &Container {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-basis: 45%;
-        padding: 20px 30px;
-        margin-right: 30px;
-
-        border-radius: 10px;
+        justify-content: flex-start;
+        align-items: flex-end;
+        margin-bottom: 20px;
     }
+
+    &Name {
+        margin-bottom: 30px;
+        justify-content: space-between;
+    }
+
+    &RSC {
+        margin-bottom: 50px;
+        &Item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 50px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        &Icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+
+        &Text {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+    }
+}
+
+.fwRegular {
+    font-weight: 400;
 }

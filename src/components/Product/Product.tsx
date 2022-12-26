@@ -12,7 +12,6 @@ import StockIcon from '../../assets/icons/Stock.svg';
 
 function Product(props: IProductData) {
     const {
-        id,
         title,
         description,
         price,
@@ -25,68 +24,62 @@ function Product(props: IProductData) {
     } = { ...props };
 
     return (
-        <div className={styles.Product} id={id.toString()}>
-            <div className={styles.ProductPresentation}>
+        <div className={styles.Product}>
+            <div className={styles.presentation}>
                 <ProductImages thumbnail={thumbnail} images={images} />
             </div>
 
-            <div className={styles.ProductInfo}>
+            <div className={styles.info}>
                 <div
                     className={ClassNames(
-                        styles.ProductInfoContainer,
-                        styles.ProductInfoName
+                        styles.infoContainer,
+                        styles.infoName
                     )}
                 >
-                    <h3 className={styles.ProductInfoTitle}>{title}</h3>
-                    <p className={styles.ProductInfoBrand}>{brand}</p>
+                    <h3 className={styles.infoTitle}>{title}</h3>
+                    <p className={styles.infoBrand}>{brand}</p>
                 </div>
 
-                <p className={styles.ProductInfoDescription}>{description}</p>
+                <p className={styles.infoDescription}>{description}</p>
 
                 <div
-                    className={ClassNames(
-                        styles.ProductInfoContainer,
-                        styles.ProductInfoRSC
-                    )}
+                    className={ClassNames(styles.infoContainer, styles.infoRSC)}
                 >
-                    <div className={styles.ProductInfoRSCItem}>
+                    <div className={styles.infoRSCItem}>
                         <img
-                            className={styles.ProductInfoRSCIcon}
+                            className={styles.infoRSCIcon}
                             src={RateIcon}
                             alt=""
                         />
-                        <p className={styles.ProductInfoRSCText}>{rating}</p>
+                        <p className={styles.infoRSCText}>{rating}</p>
                     </div>
-                    <div className={styles.ProductInfoRSCItem}>
+                    <div className={styles.infoRSCItem}>
                         <img
-                            className={styles.ProductInfoRSCIcon}
+                            className={styles.infoRSCIcon}
                             src={StockIcon}
                             alt=""
                         />
-                        <p className={styles.ProductInfoRSCText}>
-                            <span>Stock: </span>
+                        <p className={styles.infoRSCText}>
+                            <span className={styles.fwRegular}>Stock:</span>{' '}
                             {stock}
                         </p>
                     </div>
-                    <div className={styles.ProductInfoRSCItem}>
+                    <div className={styles.infoRSCItem}>
                         <img
-                            className={styles.ProductInfoRSCIcon}
+                            className={styles.infoRSCIcon}
                             src={CategoryIcon}
                             alt=""
                         />
-                        <p className={styles.ProductInfoRSCText}>{category}</p>
+                        <p className={styles.infoRSCText}>{category}</p>
                     </div>
                 </div>
 
-                <div
-                    className={ClassNames(
-                        styles.ProductInfoContainer,
-                        styles.ProductPrice
-                    )}
-                >
-                    <p className={styles.ProductInfoPrice}>{price}$</p>
-                    <Button text="by now" />
-                    <Button text="add to cart" isReverse />
+                <div className={ClassNames(styles.infoContainer, styles.price)}>
+                    <p className={styles.infoPrice}>{price}$</p>
+                    <Button callback={() => {}}>by now</Button>
+                    <Button callback={() => {}} isReverse>
+                        add to cart
+                    </Button>
                 </div>
             </div>
         </div>
