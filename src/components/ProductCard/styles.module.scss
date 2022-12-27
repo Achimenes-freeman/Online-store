@@ -1,0 +1,70 @@
+@import '../../variables.scss';
+
+.CardCont{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+    width: 250px;
+    border: 1px solid $blue-bg;
+    border-radius: 5px;
+    background: $white;
+    text-align: center;
+    font-family: $montserrat;
+}
+
+.cardImg {
+    height: 150px;
+    width: 250px;
+    border-radius: 5px 5px 0 0;
+    filter: drop-shadow(0 8px 3px $gray-blue-bg);
+}
+
+.title {
+    padding: 0;
+    margin: 0;
+    color: $black-text;
+    font-size: 18px;
+    font-weight: 600;
+    filter: drop-shadow(0 3px 3px $blue-bg);
+}
+
+.description {
+    padding: 0;
+    margin: 0;
+    color: $gray-text;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.buttonCont {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 110px;
+    border: 1px solid $blue-bg;
+    border-radius: 5px;
+    background-color: $white;
+    color: $blue-bg;
+    cursor: pointer;
+    font-family: $montserrat;
+    font-size: 16px;
+    outline: none;
+}
+
+.buttonAdd {
+    background-color: $blue-bg;
+    color: $white;
+}

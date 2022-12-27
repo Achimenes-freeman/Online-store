@@ -3,6 +3,7 @@ import SortInput from '../../generics/SortInput/SortInput';
 import styles from './styles.module.scss';
 import { MainPageType, Product } from './types';
 import Filters from '../Filters/Filters'
+import ProductCard from '../ProductCard/ProductCard';
 
 
 
@@ -51,7 +52,7 @@ export default function MainPage({products}:MainPageType) {
                     <div className={styles.productsList}>
                         {
                             someProducts || products
-                            ? someProducts.map(product => <div>{product.title}</div>)
+                            ? someProducts.map(product => <ProductCard product={product}/>)
                             : 'No products found'
                         }
                     </div>

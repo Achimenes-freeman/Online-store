@@ -18,7 +18,7 @@
 
 .wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: row;
     justify-content: space-between;
     width: 1600px;
@@ -46,12 +46,13 @@
     }
 
     &List {
-        display: flex;
+        display: grid;
+        grid-template-columns: auto auto auto auto;
         align-items: center;
+        gap: 25px;
         justify-content: center;
         min-height: calc(100vh - 265px);
         width: 100%;
-        border: 1px solid $blue-bg;
         border-radius: 20px;
         font-size: 24px;
         overflow: hidden;
