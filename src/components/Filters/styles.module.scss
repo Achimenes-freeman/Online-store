@@ -1,0 +1,43 @@
+@import '../../variables.scss';
+
+.FiltersContainer, 
+.rangeContainer,
+.rangeHeading {
+    box-sizing: border-box;
+}
+
+.FiltersContainer {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 1fr 1fr 150px 150px;
+    gap: 25px;
+    min-height: calc(100vh - 200px);
+    width: 400px;
+    border: 1px solid $blue-bg;
+    border-radius: 20px;
+    background-color: $white;
+    color: $black-text;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.rangeContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 150px;
+    width: 100%;
+    padding: 20px;
+}
+
+.rangeHeading {
+    margin: 0;
+    padding: 0;
+    color: $red-bg;
+    font-size: 36px;
+    font-weight: 600;
+    filter: drop-shadow(0px 10px 3px $gray-blue-bg);
+}
+

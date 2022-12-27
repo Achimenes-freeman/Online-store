@@ -1,16 +1,17 @@
+import SortInput from '../../generics/SortInput/SortInput';
 import styles from './styles.module.scss';
 import { MainPageType } from './types';
+import Filters from '../Filters/Filters'
 
 export default function MainPage({products}:MainPageType) {
     return (
-        <section className={styles.mainPage}>
+        <section className={styles.MainPage}>
             <div className={styles.wrapper}>
-                <aside className={styles.filtersContainer}>
-                    Filters
-                </aside>
+                <Filters />
                 <div className={styles.productsContainer}>
                     <div className={styles.productsUIBar}>
                         <input className={styles.Search} type="search" placeholder='Search...'/>
+                        <SortInput callback={() => 1}/>
                         <div className={styles.UIBarButtonsContainer}>
                             <button className={styles.UIBarButton} type='button'>
                                 <img src="" alt="BP" />

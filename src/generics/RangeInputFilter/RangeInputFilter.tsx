@@ -55,7 +55,7 @@ export default function RangeInputFilter({min, max, callback}: GenericRangeInput
     }
 
     return (
-        <>
+        <div className={styles.Container}>
             <div className={styles.spanContainer}>
                 <span>{minValue}</span>—<span>{maxValue}</span>
             </div>
@@ -64,6 +64,6 @@ export default function RangeInputFilter({min, max, callback}: GenericRangeInput
                 <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMin} value={minValue} />
                 <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMax} value={maxValue} />
             </div>
-        </>
+        </div>
     )
 }

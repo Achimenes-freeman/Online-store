@@ -1,6 +1,6 @@
 @import '../../variables.scss';
 
-.mainPage,
+.MainPage,
 .wrapper,
 .filtersContainer,
 .productsContainer, 
@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 
-.mainPage {
+.MainPage {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,20 +23,6 @@
     justify-content: space-between;
     width: 1600px;
     gap: 50px;
-}
-
-.filtersContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(100vh - 200px);
-    width: 400px;
-    border: 1px solid $blue-bg;
-    border-radius: 20px;
-    background-color: $white;
-    color: $black-text;
-    font-size: 32px;
-    font-weight: 600;
 }
 
 .products {
