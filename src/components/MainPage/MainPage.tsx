@@ -11,12 +11,6 @@ export default function MainPage({products}:MainPageType) {
                 <div className={styles.productsContainer}>
                     <div className={styles.productsUIBar}>
                         <input className={styles.Search} type="search" placeholder='Search...'/>
-                        <select className={styles.Sort} name="sort" id="sort">
-                            <option value="HP">Sort to highest price</option>
-                            <option value="LP">Sort to lowest price</option>
-                            <option value="HR">Sort to highest rating</option>
-                            <option value="LR">Sort to lowest rating</option>
-                        </select>
                         <div className={styles.UIBarButtonsContainer}>
                             <button className={styles.UIBarButton} type='button'>
                                 <img src="" alt="BP" />
