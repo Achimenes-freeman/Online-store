@@ -1,14 +1,19 @@
-import styles from './Button.module.scss';
+import classNames from 'classnames';
+import styles from './styles.module.scss';
 import { GenericButton } from './types';
 
-function Button({ text, ...props }: GenericButton) {
+function Button(props: GenericButton) {
+    const { callback, isReverse, children } = props;
     return (
         <button
-            onClick={props.callback}
+            onClick={callback}
             type="button"
-            className={styles.Button}
+            className={classNames(
+                styles.Button,
+                isReverse ? styles.reverse : null
+            )}
         >
-            {text}
+            {children}
         </button>
     );
 }
