@@ -1,39 +1,39 @@
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Product from '../Product/Product';
 
-import { IProductPageProps, IProductData, productsArray } from './types';
+import { IProductData } from './types';
 
 import styles from './style.module.scss';
 
-function ProductPage({ productId }: IProductPageProps) {
-    const {
-        id,
-        title,
-        description,
-        price,
-        discountPercentage,
-        rating,
-        stock,
-        brand,
-        category,
-        thumbnail,
-        images,
-    } = productsArray.find((item) => item.id === productId) as IProductData;
+function ProductPage() {
+    const { productId } = useParams();
+
+    const [product, setProduct] = useState<IProductData>();
+
+    useEffect(() => {
+        fetch(`https://dummyjson.com/products/${productId}`)
+            .then((res) => res.json())
+            .then((data) => setProduct(data));
+    }, [productId]);
 
     return (
         <div className={styles.ProductPage}>
-            <Product
-                id={id}
-                title={title}
-                description={description}
-                price={price}
-                discountPercentage={discountPercentage}
-                rating={rating}
-                stock={stock}
-                brand={brand}
-                category={category}
-                thumbnail={thumbnail}
-                images={images}
-            />
+            {product && (
+                <Product
+                    id={product.id}
+                    title={product.title}
+                    description={product.description}
+                    price={product.price}
+                    discountPercentage={product.discountPercentage}
+                    rating={product.rating}
+                    stock={product.stock}
+                    brand={product.brand}
+                    category={product.category}
+                    thumbnail={product.thumbnail}
+                    images={product.images}
+                />
+            )}
         </div>
     );
 }
