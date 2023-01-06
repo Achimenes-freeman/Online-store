@@ -1,0 +1,46 @@
+@import '../../variables.scss';
+
+.CartPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    max-width: 1600px;
+    width: 100%;
+    padding: 50px 0;
+}
+
+.products {
+    flex-basis: 68%;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgb(192, 192, 192);
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+
+    background-color: $gray-blue-bg;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    &Title {
+        font-size: 1.8rem;
+        color: $black-text;
+        text-transform: capitalize;
+    }
+}
+
+.input {
+    font-size: 1.2rem;
+    margin-right: 10px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.summary {
+    flex-basis: 30%;
+}
