@@ -1,5 +1,6 @@
-import { Product } from "../MainPage/types";
+import { CardSizes, Product } from "../MainPage/types";
 
 export interface ProductCardProps {
     product: Product;
+    cardSize: CardSizes;
 }

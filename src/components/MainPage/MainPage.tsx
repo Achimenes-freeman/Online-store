@@ -1,7 +1,7 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect, useCallback, useReducer} from 'react';
 import SortInput from '../../generics/SortInput/SortInput';
 import styles from './styles.module.scss';
-import { IFilters, Product } from './types';
+import { CardSizes, IFilters, Product } from './types';
 import Filters from '../Filters/Filters'
 import ProductCard from '../ProductCard/ProductCard';
 import SPLink from '../../assets/icons/small-products-icon.svg';
@@ -14,6 +14,27 @@ export default function MainPage() {
     const [filters, setFilters] = useState<IFilters>()
     const [canSort, setCanSort] = useState<boolean>(true);
     const [searchFilter, setSearchFilter] = useState<string>('');
+    const chooseBut = (curState:CardSizes, clickedBut:string) => {
+        switch(clickedBut) {
+            case 'small':
+                return {
+                    ...curState,
+                    bigCards: false,
+                    smallCards: true,
+                }
+            case 'big': 
+                return {
+                    ...curState,
+                    bigCards: true,
+                    smallCards: false,
+                }
+            default: throw new Error('Card Sizes Error')
+        }
+    }
+    const [curCardState, dispatchCurState] = useReducer(chooseBut, {
+        bigCards: false,
+        smallCards: true,
+    })
 
     const sortProducts = ( method: string = sortMethod, ableToSort: boolean = canSort) => {
         if(ableToSort) {
@@ -159,18 +180,26 @@ export default function MainPage() {
                         />
                         <SortInput callback={getSortMethod}/>
                         <div className={styles.UIBarButtonsContainer}>
-                            <button className={styles.UIBarButton} type='button'>
+                            <button 
+                                className={`${styles.UIBarButton}\n${curCardState.smallCards ? styles.UIBarButtonInactive: ''}`} 
+                                type='button' 
+                                onClick={() => dispatchCurState('big')}
+                            >
                                 <img className={styles.UIBarButtonImg} src={BPLink} alt="BP" />
                             </button>
-                            <button className={styles.UIBarButton} type='button'>
+                            <button 
+                                className={`${styles.UIBarButton}\n${curCardState.bigCards ? styles.UIBarButtonInactive : ''}`} 
+                                type='button' 
+                                onClick={() => dispatchCurState('small')}
+                            >
                                 <img className={styles.UIBarButtonImg} src={SPLink} alt="SP" />
                             </button>
                         </div>
                     </div>
-                    <div className={styles.productsList}>
+                    <div className={`${styles.productsList}\n${curCardState.smallCards ? styles.productsListSmall : styles.productsListBig}`}>
                         {
                             shownProducts
-                            ? shownProducts.map(product => <ProductCard key={product.id} product={product}/>)
+                            ? shownProducts.map(product => <ProductCard key={product.id} product={product} cardSize={curCardState}/>)
                             : 'No products found'
                         }
                     </div>

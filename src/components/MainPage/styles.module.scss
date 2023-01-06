@@ -47,7 +47,6 @@
 
     &List {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
         align-items: center;
         gap: 25px;
         justify-content: center;
@@ -55,6 +54,14 @@
         width: 1150px;
         border-radius: 5px;
         font-size: 24px;
+
+        &Big {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        &Small {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
     }
 }
 
@@ -90,6 +97,10 @@
 
         &Img {
             width: 100%;
+        }
+
+        &Inactive {
+            filter: opacity(0.5);
         }
     }
 }

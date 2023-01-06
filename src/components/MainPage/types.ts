@@ -18,3 +18,8 @@ export interface IFilters {
     'Stock'?: [number, number];
     'Price'?: [number, number];
 }
+
+export interface CardSizes {
+    bigCards: boolean;
+    smallCards: boolean;
+}

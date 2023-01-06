@@ -18,11 +18,19 @@
     flex-direction: column;
     justify-content: space-between;
     height: 300px;
-    width: 268.75px;
+    width: 100%;
     border-radius: 5px;
     background: $white;
     text-align: center;
     font-family: $montserrat;
+
+    &Small {
+        height: 300px;
+    }
+
+    &Big {
+        height: 400px;
+    }
 }
 
 .cardImgCont {
@@ -122,5 +130,32 @@
     &:hover {
         background-color: $hoverChecked;
         border-color: $hoverChecked;
+    }
+}
+
+.info {
+    &Cont { 
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 18px;
+        width: 100%;
+        font-size: 18px;
+
+        & > p {
+            filter: drop-shadow(0 0 5px $gray-text);
+        }
+    }
+
+    &Rate {
+        & > span {
+            color: $blue-bg;
+        }
+    }
+
+    &Stock {
+        & > span {
+            color: $red-bg;
+        }
     }
 }
