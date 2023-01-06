@@ -17,6 +17,17 @@
     font-size: 18px;
 }
 
+.containerOff {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    font-family: $montserrat;
+    font-size: 18px;
+    opacity: 0.5;
+}
+
 .inputFilter {
     position: relative;
     height: 15px;
@@ -98,6 +109,9 @@
 .inputLabel {
     color: $black-text;
     cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .countSpan {

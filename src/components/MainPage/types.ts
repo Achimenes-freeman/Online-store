@@ -12,6 +12,9 @@ export interface Product {
     images: string[];
 };
 
-export interface MainPageType {
-    products?: Product[];
+export interface IFilters {
+    'Brand'?: string[];
+    'Category'?: string[];
+    'Stock'?: [number, number];
+    'Price'?: [number, number];
 }

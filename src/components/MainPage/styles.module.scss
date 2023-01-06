@@ -68,17 +68,29 @@
     }
 
     &Button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         height: 50px;
         width: 50px;
-        padding: 0;
+        padding: 5px;
         margin: 0;
         border: 1px solid $blue-bg;
-        border-radius: 15px;
+        border-radius: 5px;
         outline: none;
         cursor: pointer;
         background-color: $white;
         font-family: $ubuntu;
         font-size: 18px;
+        transition: 0.2s ease-in-out;
+        
+        &:hover {
+            transform: scale(1.05);
+        }
+
+        &Img {
+            width: 100%;
+        }
     }
 }
 
