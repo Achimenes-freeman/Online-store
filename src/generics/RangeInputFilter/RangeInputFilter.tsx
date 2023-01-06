@@ -1,56 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GenericRangeInputFilter } from "./types";
 import styles from "./styles.module.scss";
 
-export default function RangeInputFilter({min, max, title, changeFilters}: GenericRangeInputFilter) {
+export default function RangeInputFilter({min, max, title, changeFilters, minValue, maxValue}: GenericRangeInputFilter) {
     const gap = Math.floor(max / 18);
-    const [minValue, setMinValue] = useState(min);
-    const [maxValue, setMaxValue] = useState(max);
+    const [canFind, setCanFind] = useState<boolean>(true);
+    const [minValueState, setMinValueState] = useState(minValue);
+    const [maxValueState, setMaxValueState] = useState(maxValue);
     const [fillRange, setFillRange] = useState({
-        background: `linear-gradient(to right, #dae4ff ${(minValue / max) * 100}% , #0c75ff ${(minValue / max) * 100}% , #0c75ff ${(maxValue / max) * 100}%, #dae4ff ${(maxValue / max) * 100}%)`
+        background: `linear-gradient(to right, #dae4ff ${(minValueState / max) * 100}% , #0c75ff ${(minValueState / max) * 100}% , #0c75ff ${(maxValueState / max) * 100}%, #dae4ff ${(maxValueState / max) * 100}%)`
     });
+    useEffect(() => {
+        if(minValue !== Infinity && maxValue !== Infinity) {
+            setMinValueState(minValue)
+            setMaxValueState(maxValue);
+            setFillRange({
+                background: `linear-gradient(to right, #dae4ff ${(minValue / max) * 100}% , #0c75ff ${(minValue / max) * 100}% , #0c75ff ${(maxValue / max) * 100}%, #dae4ff ${(maxValue / max) * 100}%)`
+            })
+            setCanFind(true)
+        } else {
+            setCanFind(false)
+        }
+    }, [minValue, maxValue, max])
     
     
     const onChangeMin = (event:React.ChangeEvent<HTMLInputElement>) => {
         if(event.target.value) {
             let newValue = Number(event.target.value);
             const perMin = (newValue / Number(max)) * 100;
-            const perMax = (maxValue / Number(max)) * 100;
+            const perMax = (maxValueState / Number(max)) * 100;
             if(newValue >= max - gap) {
                 newValue = max - gap;
             }
-            if((maxValue - newValue) <= gap) {
-                setMaxValue(newValue + gap);
-                changeFilters(title, [minValue, newValue + gap])
+            if((maxValueState - newValue) <= gap) {
+                setMaxValueState(newValue + gap);
+                changeFilters(title, [minValueState, newValue + gap])
             }
             
-            setMinValue(Number(newValue));
+            setMinValueState(Number(newValue));
             setFillRange({
                 background: `linear-gradient(to right, #dae4ff ${perMin}% , #0c75ff ${perMin}% , #0c75ff ${perMax}%, #dae4ff ${perMax}%)`
             })
 
-            changeFilters(title, [newValue, maxValue])
+            changeFilters(title, [newValue, maxValueState])
         }
     }
     const onChangeMax = (event:React.ChangeEvent<HTMLInputElement>) => {
         if(event.target.value) {
             let newValue = Number(event.target.value);
-            const perMin = (minValue / Number(max)) * 100;
+            const perMin = (minValueState / Number(max)) * 100;
             const perMax = (newValue / Number(max)) * 100;
             if(newValue <= min + gap) {
                 newValue = min + gap;
             }
-            if((newValue - minValue) <= gap) {
-                setMinValue(newValue - gap);
-                changeFilters(title, [newValue - gap, maxValue])
+            if((newValue - minValueState) <= gap) {
+                setMinValueState(newValue - gap);
+                changeFilters(title, [newValue - gap, maxValueState])
             }
             
-            setMaxValue(newValue);
+            setMaxValueState(newValue);
             setFillRange({
                 background: `linear-gradient(to right, #dae4ff ${perMin}% , #0c75ff ${perMin}% , #0c75ff ${perMax}%, #dae4ff ${perMax}%)`
             })
 
-            changeFilters(title, [minValue, newValue])
+            changeFilters(title, [minValueState, newValue])
         }
     }
 
@@ -58,12 +71,15 @@ export default function RangeInputFilter({min, max, title, changeFilters}: Gener
     return (
         <div className={styles.Container}>
             <div className={styles.spanContainer}>
-                <span>{minValue}</span>—<span>{maxValue}</span>
+                {canFind ?
+                    <><span>{minValueState}</span>—<span>{maxValueState}</span></> :
+                    <div className={styles.NoProdCont}>No products found!</div>
+                }
             </div>
             <div className={styles.inputContainer}>
                 <div className={styles.sliderTrack} style={fillRange}/>
-                <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMin} value={minValue} />
-                <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMax} value={maxValue} />
+                <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMin} value={minValueState} />
+                <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMax} value={maxValueState} />
             </div>
         </div>
     )

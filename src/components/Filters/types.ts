@@ -3,6 +3,7 @@ import { Product } from "../MainPage/types";
 export interface FiltersProps {
     products: Product[];
     getFilters: (newFilters: IFilters) => void;
+    resetFilters: () => void;
     newProducts: Product[];
 }
 

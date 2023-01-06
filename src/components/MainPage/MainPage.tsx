@@ -67,6 +67,12 @@ export default function MainPage() {
         setFilters({...filters, ...newFilters});
         sortProducts(sortMethod, true);
     }
+    const resetFilters = () => {
+        if(filters) {
+            setFilters(undefined)
+            sortProducts(sortMethod, true);
+        }
+    }
     const getFilteredProducts = () => {
         if(products) {
             let filteredProducts:Product[] = [...products];
@@ -166,7 +172,7 @@ export default function MainPage() {
         <section className={styles.MainPage}>
             {products
             ?<div className={styles.wrapper}>
-                <Filters products={products} getFilters={getFilters} newProducts={shownProducts}/>
+                <Filters products={products} getFilters={getFilters} resetFilters={resetFilters} newProducts={shownProducts}/>
                 <div className={styles.productsContainer}>
                     <div className={styles.productsUIBar}>
                         <input 

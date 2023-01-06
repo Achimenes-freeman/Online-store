@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputFilter from '../../generics/InputFilter/InputFilter';
 import styles from './styles.module.scss';
 import { CheckboxFilterProps, FiltersArr, ICheckboxFilters } from './types';
 
-export default function CheckboxFilter({products, prop, title, changeFilters, newProducts}:CheckboxFilterProps) {
+export default function CheckboxFilter({products, prop, title, changeFilters, newProducts, isReset, setResetFalse}:CheckboxFilterProps) {
     const productsMap = new Map();
     const newProductsMap = new Map();
     let filters:FiltersArr = [];
@@ -49,12 +49,18 @@ export default function CheckboxFilter({products, prop, title, changeFilters, ne
         changeFilters(title, resFilters)
     }
 
+    useEffect(() => {
+        if(isReset) {
+            setCheckboxFilters([])
+        }
+    }, [isReset])
+
     return (
     <div className={styles.Container}>
         <h3 className={styles.title}>{title}</h3>
         {filters.length ?
             <div className={styles.checkboxContainer}>
-                {filters.map(filter => <InputFilter callback={onCheck} key={filter[0]} text={filter[0]} count={filter[1][0]} totalCount={filter[1][1]}/>)}
+                {filters.map(filter => <InputFilter isReset={isReset} setResetFalse={setResetFalse} callback={onCheck} key={filter[0]} text={filter[0]} count={filter[1][0]} totalCount={filter[1][1]}/>)}
             </div>
             : 'Loading'}
     </div>

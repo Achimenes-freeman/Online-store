@@ -7,6 +7,8 @@ export interface CheckboxFilterProps {
     prop: keyof Product;
     title: FilterNames;
     changeFilters: (filterName: FilterNames, filterValue:FilterTypes) => void;
+    isReset: boolean;
+    setResetFalse: () => void;
 }
 
 export type ICheckboxFilters = string[]

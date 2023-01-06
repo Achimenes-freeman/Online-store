@@ -1,15 +1,23 @@
-import RangeInputFilter from '../../generics/RangeInputFilter/RangeInputFilter';
+import { useState } from 'react';
 import CheckboxFilter from '../CheckboxFilter/CheckboxFilter';
+import RangeFilter from '../RangeFilter/RangeFilter';
 import styles from './styles.module.scss';
 import { FilterNames, FilterTypes, FiltersProps, IFilters } from './types';
 
 
-export default function Filter({products, getFilters, newProducts}:FiltersProps) {
-
+export default function Filter({products, getFilters, resetFilters, newProducts}:FiltersProps) {
+    const [resetState, setResetState] = useState(false)
     const changeFilters = (filterName: FilterNames, filterValue: FilterTypes) => {
         const filters:IFilters = {};
         filters[filterName] = filterValue
         getFilters(filters)
+    }
+    const resetAllFilters = () => {
+        resetFilters();
+        setResetState(true)
+    }
+    const setResetFalse = () => {
+        setResetState(false)
     }
     
     return (
@@ -20,6 +28,8 @@ export default function Filter({products, getFilters, newProducts}:FiltersProps)
                 title='Category' 
                 changeFilters={changeFilters} 
                 newProducts={newProducts}
+                isReset={resetState}
+                setResetFalse={setResetFalse}
             />
             <CheckboxFilter 
                 products={products} 
@@ -27,8 +37,10 @@ export default function Filter({products, getFilters, newProducts}:FiltersProps)
                 title='Brand' 
                 changeFilters={changeFilters} 
                 newProducts={newProducts}
+                isReset={resetState}
+                setResetFalse={setResetFalse}
             />
-            <div className={styles.rangeContainer}>
+            {/* <div className={styles.rangeContainer}>
                 <h3 className={styles.rangeHeading}>Price</h3>
                 <RangeInputFilter 
                     min={Math.min(...(products.map(product => product.price)))} 
@@ -36,8 +48,9 @@ export default function Filter({products, getFilters, newProducts}:FiltersProps)
                     title='Price'
                     changeFilters={changeFilters}
                 />
-            </div>
-            <div className={styles.rangeContainer}> 
+            </div> */}
+            <RangeFilter products={products} type='price' changeFilters={changeFilters} newProducts={newProducts}/>
+            {/* <div className={styles.rangeContainer}> 
             <h3 className={styles.rangeHeading}>Stock</h3>
                 <RangeInputFilter 
                     min={Math.min(...(products.map(product => product.stock)))} 
@@ -45,7 +58,9 @@ export default function Filter({products, getFilters, newProducts}:FiltersProps)
                     title='Stock'
                     changeFilters={changeFilters}
                 />
-            </div>
+            </div> */}
+            <RangeFilter products={products} type='stock' changeFilters={changeFilters} newProducts={newProducts}/>
+            <button className={styles.resetBut} type='button' onClick={resetAllFilters}>Reset filters</button>
         </aside>
     )
 }
