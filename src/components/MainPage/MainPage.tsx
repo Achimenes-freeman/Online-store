@@ -13,6 +13,7 @@ export default function MainPage() {
     const [sortMethod, setSortMethod] = useState<string>('high-rate')
     const [filters, setFilters] = useState<IFilters>()
     const [canSort, setCanSort] = useState<boolean>(true);
+    const [searchFilter, setSearchFilter] = useState<string>('');
 
     const sortProducts = ( method: string = sortMethod, ableToSort: boolean = canSort) => {
         if(ableToSort) {
@@ -46,65 +47,78 @@ export default function MainPage() {
         sortProducts(sortMethod, true);
     }
     const getFilteredProducts = () => {
-        if(products && filters) {
+        if(products) {
             let filteredProducts:Product[] = [...products];
-            if(filters.Brand) {
-                for(let i = 0; i < filters.Brand.length; i += 1){
-                    if(i === 0) {
-                        filteredProducts = filteredProducts
-                        .filter(item => 
-                            filters.Brand && item.brand.toUpperCase() === filters.Brand[i].toUpperCase()
-                        )
-                    } else {
-                        filteredProducts = filteredProducts.concat(products
+            if(filters) {
+                if(filters.Brand) {
+                    for(let i = 0; i < filters.Brand.length; i += 1){
+                        if(i === 0) {
+                            filteredProducts = filteredProducts
                             .filter(item => 
                                 filters.Brand && item.brand.toUpperCase() === filters.Brand[i].toUpperCase()
-                            ))
-                    }
-                }
-            }
-            if(filters.Category) {
-                if(filters.Brand) {
-                    const oldFilteredProducts = [...filteredProducts]
-                    for(let i = 0; i < filters.Category.length; i += 1){
-                        if(i === 0) {
-                            filteredProducts = filteredProducts
-                            .filter(item => 
-                                filters.Category && item.category.toUpperCase() === filters.Category[i].toUpperCase()
-                            )
-                        } else {
-                            filteredProducts = filteredProducts.concat(oldFilteredProducts
-                                .filter(item => 
-                                    filters.Category && item.category.toUpperCase() === filters.Category[i].toUpperCase()
-                                ))
-                        }
-                    }
-                } else {
-                    for(let i = 0; i < filters.Category.length; i += 1){
-                        if(i === 0) {
-                            filteredProducts = filteredProducts
-                            .filter(item => 
-                                filters.Category && item.category.toUpperCase() === filters.Category[i].toUpperCase()
                             )
                         } else {
                             filteredProducts = filteredProducts.concat(products
                                 .filter(item => 
-                                    filters.Category && item.category.toUpperCase() === filters.Category[i].toUpperCase()
+                                    filters.Brand && item.brand.toUpperCase() === filters.Brand[i].toUpperCase()
                                 ))
                         }
                     }
                 }
+                if(filters.Category) {
+                    if(filters.Brand) {
+                        const oldFilteredProducts = [...filteredProducts]
+                        for(let i = 0; i < filters.Category.length; i += 1){
+                            if(i === 0) {
+                                filteredProducts = filteredProducts
+                                .filter(item => 
+                                    filters.Category && item.category.toUpperCase() === filters.Category[i].toUpperCase()
+                                )
+                            } else {
+                                filteredProducts = filteredProducts.concat(oldFilteredProducts
+                                    .filter(item => 
+                                        filters.Category && item.category.toUpperCase() === filters.Category[i].toUpperCase()
+                                    ))
+                            }
+                        }
+                    } else {
+                        for(let i = 0; i < filters.Category.length; i += 1){
+                            if(i === 0) {
+                                filteredProducts = filteredProducts
+                                .filter(item => 
+                                    filters.Category && item.category.toUpperCase() === filters.Category[i].toUpperCase()
+                                )
+                            } else {
+                                filteredProducts = filteredProducts.concat(products
+                                    .filter(item => 
+                                        filters.Category && item.category.toUpperCase() === filters.Category[i].toUpperCase()
+                                    ))
+                            }
+                        }
+                    }
+                }
+                if(filters.Price) {
+                    filteredProducts = filteredProducts
+                    .filter(item => 
+                        filters.Price && item.price >= filters.Price[0] && item.price <= filters.Price[1]
+                    )
+                }
+                if(filters.Stock) {
+                    filteredProducts = filteredProducts
+                    .filter(item => 
+                        filters.Stock && item.stock >= filters.Stock[0] && item.stock <= filters.Stock[1]
+                    )
+                }
             }
-            if(filters.Price) {
+
+            if(searchFilter) {
                 filteredProducts = filteredProducts
-                .filter(item => 
-                    filters.Price && item.price >= filters.Price[0] && item.price <= filters.Price[1]
-                )
-            }
-            if(filters.Stock) {
-                filteredProducts = filteredProducts
-                .filter(item => 
-                    filters.Stock && item.stock >= filters.Stock[0] && item.stock <= filters.Stock[1]
+                .filter( item =>
+                    item.brand.toLowerCase().includes(searchFilter.toLowerCase()) ||
+                    item.category.toLowerCase().includes(searchFilter.toLowerCase()) ||
+                    item.description.toLowerCase().includes(searchFilter.toLowerCase()) || 
+                    item.price === Number(searchFilter.toLowerCase()) || 
+                    item.title.toLowerCase().includes(searchFilter.toLowerCase())
                 )
             }
 
@@ -113,7 +127,7 @@ export default function MainPage() {
         }
     }
 
-    const memoGetFilteredProducts = useCallback(getFilteredProducts, [filters, products])
+    const memoGetFilteredProducts = useCallback(getFilteredProducts, [filters, products, searchFilter])
     const memoSortProducts = useCallback(sortProducts, [shownProducts, sortMethod, canSort])
 
     useEffect(() => {
@@ -134,7 +148,15 @@ export default function MainPage() {
                 <Filters products={products} getFilters={getFilters} newProducts={shownProducts}/>
                 <div className={styles.productsContainer}>
                     <div className={styles.productsUIBar}>
-                        <input className={styles.Search} type="search" placeholder='Search...'/>
+                        <input 
+                            className={styles.Search} 
+                            type="search" 
+                            placeholder='Search...' 
+                            value={searchFilter} 
+                            onChange={
+                                (event:React.ChangeEvent<HTMLInputElement>) => setSearchFilter(event.target.value)
+                            }
+                        />
                         <SortInput callback={getSortMethod}/>
                         <div className={styles.UIBarButtonsContainer}>
                             <button className={styles.UIBarButton} type='button'>
