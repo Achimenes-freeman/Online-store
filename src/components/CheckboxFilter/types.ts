@@ -12,4 +12,4 @@ export interface CheckboxFilterProps {
 }
 
 export type ICheckboxFilters = string[]
-export type FiltersArr = [string, [number, number]][]
+export type FiltersArr = [string, [number, number, boolean]][]

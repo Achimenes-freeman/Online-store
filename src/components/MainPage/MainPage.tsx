@@ -3,9 +3,9 @@ import SortInput from '../../generics/SortInput/SortInput';
 import styles from './styles.module.scss';
 import { CardSizes, IFilters, Product } from './types';
 import Filters from '../Filters/Filters'
-import ProductCard from '../ProductCard/ProductCard';
 import SPLink from '../../assets/icons/small-products-icon.svg';
 import BPLink from '../../assets/icons/big-products-icon.svg';
+import ProductCardsList from '../ProductCardsList/ProductCardsList';
 
 export default function MainPage() {
     const [products, setProducts] = useState<Product[]>()
@@ -71,6 +71,9 @@ export default function MainPage() {
         if(filters) {
             setFilters(undefined)
             sortProducts(sortMethod, true);
+        }
+        if(searchFilter) {
+            setSearchFilter('')
         }
     }
     const getFilteredProducts = () => {
@@ -202,16 +205,10 @@ export default function MainPage() {
                             </button>
                         </div>
                     </div>
-                    <div className={`${styles.productsList}\n${curCardState.smallCards ? styles.productsListSmall : styles.productsListBig}`}>
-                        {
-                            shownProducts
-                            ? shownProducts.map(product => <ProductCard key={product.id} product={product} cardSize={curCardState}/>)
-                            : 'No products found'
-                        }
-                    </div>
+                    <ProductCardsList products={shownProducts} cardSize={curCardState}/>
                 </div>
             </div>
-            : 'Loading'}
+            : 'Loading...'}
         </section>
     )
 }

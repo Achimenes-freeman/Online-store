@@ -27,11 +27,11 @@ export default function CheckboxFilter({products, prop, title, changeFilters, ne
     Array.from(productsMap.keys()).forEach(key => {
         if(!newProductsMap.has(key)) {
             const newValue = productsMap.get(key)[1];
-            newProductsMap.set(key, [0, newValue])
+            newProductsMap.set(key, [0, newValue, false])
         } else {
             const newValue = productsMap.get(key)[1];
             const oldValue = newProductsMap.get(key)[0]
-            newProductsMap.set(key, [oldValue, newValue])
+            newProductsMap.set(key, [oldValue, newValue, true])
         }
     })
     filters = Array.from(newProductsMap.entries()).sort((a, b) => a[0].localeCompare(b[0]));
@@ -60,7 +60,17 @@ export default function CheckboxFilter({products, prop, title, changeFilters, ne
         <h3 className={styles.title}>{title}</h3>
         {filters.length ?
             <div className={styles.checkboxContainer}>
-                {filters.map(filter => <InputFilter isReset={isReset} setResetFalse={setResetFalse} callback={onCheck} key={filter[0]} text={filter[0]} count={filter[1][0]} totalCount={filter[1][1]}/>)}
+                {filters.map(filter => 
+                    <InputFilter 
+                        isReset={isReset} 
+                        setResetFalse={setResetFalse} 
+                        callback={onCheck} 
+                        key={filter[0]} 
+                        text={filter[0]} 
+                        count={filter[1][0]} 
+                        totalCount={filter[1][1]}
+                    />
+                )}
             </div>
             : 'Loading'}
     </div>

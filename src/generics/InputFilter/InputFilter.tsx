@@ -5,19 +5,12 @@ import styles from "./styles.module.scss"
 export default function InputFilter({text, count, totalCount, callback, isReset = false, setResetFalse}: GenericInputFilter) {
 
     const [checkState, setCheckState] = useState(false);
-    // const [resetState, setResetState] = useState(false)
     useEffect(() => {
         if(isReset) {
             setCheckState(false)
-            // setResetState(true)
             setResetFalse();
         }
     }, [isReset, setResetFalse])
-    // useEffect(() => {
-    //     if(resetState) {
-
-    //     }
-    // }, [resetState])
     const onChange = () => {
         if(callback) {
             callback(text)
