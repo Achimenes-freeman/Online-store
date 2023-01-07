@@ -5,12 +5,14 @@ import ProductPage from './components/ProductPage/ProductPage';
 import { Layout } from './components/Layout/Layout';
 
 function App() {
-    // const arrayOfCartProducts = [
-    //     { productId: 1, amount: 1 },
-    //     { productId: 2, amount: 1 },
-    //     { productId: 3, amount: 1 },
-    //     { productId: 4, amount: 1 },
-    // ];
+    const arrayOfCartProducts = [
+        { productId: 1, amount: 1 },
+        { productId: 2, amount: 1 },
+        { productId: 3, amount: 1 },
+        { productId: 4, amount: 1 },
+    ];
+
+    localStorage.setItem('cart-products', JSON.stringify(arrayOfCartProducts))
 
     return (
         <Routes>

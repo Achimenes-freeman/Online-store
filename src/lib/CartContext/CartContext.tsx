@@ -18,12 +18,7 @@ const cartProductsData: TCartProductsData = localStorage.getItem(
     : [];
 
 export const CartContext = React.createContext<ContextValue>({
-    cartProducts: [
-        { productId: 1, amount: 1 },
-        { productId: 2, amount: 1 },
-        { productId: 3, amount: 1 },
-        { productId: 4, amount: 1 },
-    ],
+    cartProducts: cartProductsData,
     changeCartProducts: () => {},
 });
 
@@ -36,12 +31,7 @@ export function CartContextProvider({ children }: ICartDataChildren) {
     };
 
     const [value] = useState<ContextValue>({
-        cartProducts: [
-            { productId: 1, amount: 1 },
-            { productId: 2, amount: 1 },
-            { productId: 3, amount: 1 },
-            { productId: 4, amount: 1 },
-        ],
+        cartProducts,
         changeCartProducts,
     });
 
