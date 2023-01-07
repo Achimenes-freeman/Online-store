@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { CartContext } from '../../lib/CartContext/CartContext';
 import { IProductData } from '../ProductPage/types';
 import { InfoIcons } from '../InfoIcons/InfoIcons';
 
@@ -11,13 +12,19 @@ import styles from './style.module.scss';
 import PlusIcon from '../../assets/icons/plus-icon.svg';
 import MinusIcon from '../../assets/icons/minus-icon.svg';
 
-export function CartProduct({ productId, index }: ICartProduct) {
+export function CartProduct({
+    productId,
+    index,
+    amountReceived,
+}: ICartProduct) {
+    const { removeCartProduct, changeProductAmount } = useContext(CartContext);
+
     const [productData, setProductData] = useState<IProductData>();
-    // const [order, setOrder] = useState(index + 1);
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState(amountReceived);
     const [cost, setCost] = useState(
         productData?.price && productData.price * amount
     );
+
     useEffect(() => {
         fetch(`https://dummyjson.com/products/${productId}`)
             .then((res) => res.json())
@@ -29,10 +36,20 @@ export function CartProduct({ productId, index }: ICartProduct) {
     }, [amount, productData]);
 
     const incProduct = () => {
-        setAmount(amount + 1);
+        if (productData?.stock && productData?.stock > amount) {
+            const currentAmount = amount + 1;
+            setAmount(currentAmount);
+            changeProductAmount(productId, currentAmount);
+        }
     };
     const decProduct = () => {
-        if (amount > 1) setAmount(amount - 1);
+        if (amount > 1) {
+            const currentAmount = amount - 1;
+            setAmount(currentAmount);
+            changeProductAmount(productId, currentAmount);
+        } else {
+            removeCartProduct(productId);
+        }
     };
 
     return (
