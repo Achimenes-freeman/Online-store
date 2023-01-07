@@ -18,10 +18,10 @@ export default function RangeInputFilter({min, max, title, changeFilters, minVal
                 background: `linear-gradient(to right, #dae4ff ${(minValue / max) * 100}% , #0c75ff ${(minValue / max) * 100}% , #0c75ff ${(maxValue / max) * 100}%, #dae4ff ${(maxValue / max) * 100}%)`
             })
             setCanFind(true)
-        } else {
-            setCanFind(false)
+        } else if(canFind) {
+            setCanFind(false);
         }
-    }, [minValue, maxValue, max])
+    }, [minValue, maxValue, max, canFind])
     
     
     const onChangeMin = (event:React.ChangeEvent<HTMLInputElement>) => {
