@@ -5,6 +5,8 @@ interface IProductCartData {
 
 export type TCartProductsData = Array<IProductCartData>;
 
-export type ICartProducts = {
-    products?: TCartProductsData;
-};
+export interface ICartProducts {
+    products: Array<IProductCartData>;
+    totalPrice: number;
+    changeTotalPrice: (num: number) => void;
+}

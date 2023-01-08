@@ -5,4 +5,6 @@ interface IProductCartData {
 
 export interface ICartProducts {
     products: Array<IProductCartData>;
+    totalPrice: number;
+    changeTotalPrice: (num: number) => void;
 }

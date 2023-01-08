@@ -16,6 +16,7 @@ export function CartProduct({
     productId,
     index,
     amountReceived,
+    changeTotalPrice,
 }: ICartProduct) {
     const { removeCartProduct, changeProductAmount } = useContext(CartContext);
 
@@ -35,18 +36,24 @@ export function CartProduct({
         setCost(productData?.price && productData.price * amount);
     }, [amount, productData]);
 
+    useEffect(() => {
+        if (productData) changeTotalPrice(productData.price);
+    }, [productData, changeTotalPrice]);
+
     const incProduct = () => {
-        if (productData?.stock && productData?.stock > amount) {
+        if (productData && productData.stock > amount) {
             const currentAmount = amount + 1;
             setAmount(currentAmount);
             changeProductAmount(productId, currentAmount);
+            changeTotalPrice(productData.price);
         }
     };
     const decProduct = () => {
-        if (amount > 1) {
+        if (productData && amount > 1) {
             const currentAmount = amount - 1;
             setAmount(currentAmount);
             changeProductAmount(productId, currentAmount);
+            changeTotalPrice(productData.price * -1);
         } else {
             removeCartProduct(productId);
         }

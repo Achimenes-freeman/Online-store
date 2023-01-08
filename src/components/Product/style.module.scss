@@ -45,9 +45,10 @@
     }
 
     &Description {
-        margin-bottom: 20px;
-        font-size: 1.4rem;
         max-width: 70%;
+        margin-bottom: 20px;
+
+        font-size: 1.4rem;
         font-weight: 300;
     }
 
@@ -62,11 +63,15 @@
         display: flex;
         justify-content: flex-start;
         align-items: flex-end;
-        margin-bottom: 20px;
+        margin-bottom: 100px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 
     &Name {
-        margin-bottom: 30px;
+        margin-bottom: 50px;
         justify-content: space-between;
     }
 
