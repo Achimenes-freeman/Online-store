@@ -1,5 +1,13 @@
 @import "../../variables.scss";
 
+.Container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
+
 .spanContainer, .inputContainer {
     align-items: center;
     display: flex;
@@ -39,7 +47,7 @@
 
     &::-webkit-slider-thumb {
         appearance: none;
-        background-color: $white-bg;
+        background-color: $white;
         border: 2px solid $blue-bg;
         border-radius: 50%;
         cursor: pointer;
@@ -74,4 +82,10 @@
     width: 100%;
     height: 15px;
     margin-top: 15px;
+}
+
+.NoProdCont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
