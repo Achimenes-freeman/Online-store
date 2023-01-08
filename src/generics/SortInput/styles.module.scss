@@ -27,16 +27,12 @@
     font-family: inherit;
     text-align: center;
     color: $blue-bg;
-    border: 1px solid $gray-blue-bg;
-    border-radius: 0.5rem;
-    background: none;
+    border: 1px solid $blue-bg;
+    border-radius: 15px;
+    background: $white;
     -webkit-appearance: none;
     appearance: none;
-
-    &:focus {
-        outline: none;
-        border: 1px solid $blue-bg;
-    }
+    outline: none;
 }
 
 .option {

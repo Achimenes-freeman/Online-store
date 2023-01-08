@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .Layout {
     min-height: 100%;
     display: flex;
@@ -9,4 +11,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: $gray-blue-bg
 }
