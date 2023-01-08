@@ -2,13 +2,15 @@ import { FilterNames, FilterTypes } from "../Filters/types";
 import { Product } from "../MainPage/types";
 
 export interface CheckboxFilterProps {
-    products: Product[];
-    newProducts: Product[];
+    defaultProducts: Product[];
+    filteredProducts: Product[];
     prop: keyof Product;
     title: FilterNames;
-    changeFilters: (filterName: FilterNames, filterValue:FilterTypes) => void;
+
     isReset: boolean;
     setResetFalse: () => void;
+    changeFilters: (filterName: FilterNames, filterValue:FilterTypes) => void;
+    currentFilters: ICheckboxFilters | undefined
 }
 
 export type ICheckboxFilters = string[]

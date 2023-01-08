@@ -3,40 +3,41 @@ import InputFilter from '../../generics/InputFilter/InputFilter';
 import styles from './styles.module.scss';
 import { CheckboxFilterProps, FiltersArr, ICheckboxFilters } from './types';
 
-export default function CheckboxFilter({products, prop, title, changeFilters, newProducts, isReset, setResetFalse}:CheckboxFilterProps) {
-    const productsMap = new Map();
-    const newProductsMap = new Map();
-    let filters:FiltersArr = [];
+export default function CheckboxFilter({defaultProducts, filteredProducts, prop, title, isReset, setResetFalse, changeFilters, currentFilters = []}:CheckboxFilterProps) {
+    const defaultProductsMap = new Map();
+    const filteredProductsMap = new Map();
+    let filters:FiltersArr = []
     
-    products.map(item => item[prop].toString().toUpperCase()).forEach(item => {
-        if(productsMap.has(item)) {
-            const newValue = productsMap.get(item)[0] + 1;
-            productsMap.set(item, [newValue, newValue]);
+    defaultProducts.map(item => item[prop].toString().toUpperCase()).forEach(item => {
+        if(defaultProductsMap.has(item)) {
+            const newValue = defaultProductsMap.get(item)[0] + 1;
+            defaultProductsMap.set(item, [newValue, newValue]);
         } else {
-            productsMap.set(item, [1, 1])
+            defaultProductsMap.set(item, [1, 1])
         }
     })
-    newProducts.map(item => item[prop].toString().toUpperCase()).forEach(item => {
-        if(newProductsMap.has(item)) {
-            const newValue = newProductsMap.get(item)[0] + 1;
-            newProductsMap.set(item, [newValue, newValue]);
+    filteredProducts.map(item => item[prop].toString().toUpperCase()).forEach((item) => {
+        if(filteredProductsMap.has(item)) {
+            const newValue = filteredProductsMap.get(item)[0] + 1;
+            filteredProductsMap.set(item, [newValue, newValue]);
         } else {
-            newProductsMap.set(item, [1, 1])
+            filteredProductsMap.set(item, [1, 1])
         }
     })
-    Array.from(productsMap.keys()).forEach(key => {
-        if(!newProductsMap.has(key)) {
-            const newValue = productsMap.get(key)[1];
-            newProductsMap.set(key, [0, newValue, false])
+    Array.from(defaultProductsMap.keys()).forEach(key => {
+        const isChecked = currentFilters.includes(key);
+        if(!filteredProductsMap.has(key)) {
+            const newValue = defaultProductsMap.get(key)[1];
+            filteredProductsMap.set(key, [0, newValue, isChecked])
         } else {
-            const newValue = productsMap.get(key)[1];
-            const oldValue = newProductsMap.get(key)[0]
-            newProductsMap.set(key, [oldValue, newValue, true])
+            const newValue = defaultProductsMap.get(key)[1];
+            const oldValue = filteredProductsMap.get(key)[0]
+            filteredProductsMap.set(key, [oldValue, newValue, isChecked])
         }
     })
-    filters = Array.from(newProductsMap.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+    filters = Array.from(filteredProductsMap.entries()).sort((a, b) => a[0].localeCompare(b[0]));
 
-    const [checkboxFilters, setCheckboxFilters] = useState<ICheckboxFilters>([])
+    const [checkboxFilters, setCheckboxFilters] = useState<ICheckboxFilters>(currentFilters)
 
     const onCheck = (filterName: string) => {
         let resFilters:ICheckboxFilters = [...checkboxFilters]
@@ -69,6 +70,7 @@ export default function CheckboxFilter({products, prop, title, changeFilters, ne
                         text={filter[0]} 
                         count={filter[1][0]} 
                         totalCount={filter[1][1]}
+                        checked={filter[1][2]}
                     />
                 )}
             </div>

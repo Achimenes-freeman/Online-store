@@ -1,8 +1,9 @@
 export interface GenericInputFilter {
+    isReset?: boolean;
+    setResetFalse: () => void;
+    callback?: (value: string) => void;
     text: string;
     count?: number;
     totalCount: number;
-    callback?: (value: string) => void;
-    isReset?: boolean;
-    setResetFalse: () => void;
+    checked: boolean;
 }

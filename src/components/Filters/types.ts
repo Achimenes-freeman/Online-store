@@ -1,10 +1,11 @@
-import { Product } from "../MainPage/types";
+import { FiltersType, Product } from "../MainPage/types";
 
 export interface FiltersProps {
-    products: Product[];
+    defaultProducts: Product[];
+    filteredProducts: Product[];
     getFilters: (newFilters: IFilters) => void;
     resetFilters: () => void;
-    newProducts: Product[];
+    filters: FiltersType | undefined;
 }
 
 export type FilterNames = 'Brand' | 'Category' | 'Stock' | 'Price';

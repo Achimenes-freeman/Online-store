@@ -5,6 +5,7 @@ export interface GenericRangeInputFilter{
     max: number;
     minValue: number;
     maxValue: number;
-    title: FilterNames;
+    title: 'Price' | 'Stock'
     changeFilters: (filterName: FilterNames, filterValue: [number, number]) => void;
+    filters: [number, number] | undefined;
 }

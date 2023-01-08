@@ -5,12 +5,12 @@ import styles from './styles.module.scss';
 import { FilterNames, FilterTypes, FiltersProps, IFilters } from './types';
 
 
-export default function Filters({products, getFilters, resetFilters, newProducts}:FiltersProps) {
+export default function Filters({defaultProducts, filteredProducts, getFilters, resetFilters, filters}:FiltersProps) {
     const [resetState, setResetState] = useState(false)
-    const changeFilters = (filterName: FilterNames, filterValue: FilterTypes) => {
-        const filters:IFilters = {};
-        filters[filterName] = filterValue
-        getFilters(filters)
+    const updateFilters = (filterName: FilterNames, filterValue: FilterTypes) => {
+        const newUpdateFilters:IFilters = {};
+        newUpdateFilters[filterName] = filterValue
+        getFilters(newUpdateFilters)
     }
     const resetAllFilters = () => {
         resetFilters();
@@ -23,38 +23,42 @@ export default function Filters({products, getFilters, resetFilters, newProducts
     return (
         <aside className={styles.FiltersContainer}>
             <CheckboxFilter 
-                products={products} 
+                defaultProducts={defaultProducts} 
                 prop='category' 
                 title='Category' 
-                newProducts={newProducts}
-                
-                changeFilters={changeFilters} 
+                filteredProducts={filteredProducts}
                 
                 isReset={resetState}
                 setResetFalse={setResetFalse}
+
+                changeFilters={updateFilters} 
+                currentFilters={filters?.Category}
             />
             <CheckboxFilter 
-                products={products} 
+                defaultProducts={defaultProducts} 
                 prop='brand' 
                 title='Brand'
-                newProducts={newProducts} 
-
-                changeFilters={changeFilters} 
+                filteredProducts={filteredProducts} 
 
                 isReset={resetState}
                 setResetFalse={setResetFalse}
+
+                changeFilters={updateFilters} 
+                currentFilters={filters?.Brand}
             />
             <RangeFilter 
-                products={products} 
+                defaultProducts={defaultProducts} 
+                filteredProducts={filteredProducts}
                 type='price' 
-                changeFilters={changeFilters} 
-                newProducts={newProducts}
+                changeFilters={updateFilters} 
+                currentFilters={filters?.Price}
             />
             <RangeFilter 
-                products={products} 
+                defaultProducts={defaultProducts} 
+                filteredProducts={filteredProducts}
                 type='stock' 
-                changeFilters={changeFilters} 
-                newProducts={newProducts}
+                changeFilters={updateFilters} 
+                currentFilters={filters?.Stock}
             />
             <button className={styles.resetBut} type='button' onClick={resetAllFilters}>Reset filters</button>
         </aside>

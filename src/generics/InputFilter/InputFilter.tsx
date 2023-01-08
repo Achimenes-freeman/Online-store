@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { GenericInputFilter } from "./types";
 import styles from "./styles.module.scss"
 
-export default function InputFilter({text, count, totalCount, callback, isReset = false, setResetFalse}: GenericInputFilter) {
+export default function InputFilter({isReset = false, setResetFalse, callback, text, count, totalCount, checked}: GenericInputFilter) {
 
-    const [checkState, setCheckState] = useState(false);
+    const [checkState, setCheckState] = useState(checked);
     useEffect(() => {
         if(isReset) {
             setCheckState(false)

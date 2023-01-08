@@ -1,19 +1,21 @@
 import {useState, useEffect, useCallback, useReducer} from 'react';
 import SortInput from '../../generics/SortInput/SortInput';
 import styles from './styles.module.scss';
-import { CardSizes, IFilters, Product } from './types';
+import { CardSizes, FiltersType, Product } from './types';
 import Filters from '../Filters/Filters'
 import SPLink from '../../assets/icons/small-products-icon.svg';
 import BPLink from '../../assets/icons/big-products-icon.svg';
 import ProductCardsList from '../ProductCardsList/ProductCardsList';
 
 export default function MainPage() {
-    const [products, setProducts] = useState<Product[]>()
-    const [shownProducts, setShownProducts] = useState<Product[]>([])
-    const [sortMethod, setSortMethod] = useState<string>('high-rate')
-    const [filters, setFilters] = useState<IFilters>()
-    const [canSort, setCanSort] = useState<boolean>(true);
+    const [products, setProducts] = useState<Product[]>();
+    const [shownProducts, setShownProducts] = useState<Product[]>([]);
+
+    const [filters, setFilters] = useState<FiltersType>();
     const [searchFilter, setSearchFilter] = useState<string>('');
+    const [sortMethod, setSortMethod] = useState<string>('high-rate');
+    const [canSort, setCanSort] = useState<boolean>(true);
+
     const chooseBut = (curState:CardSizes, clickedBut:string) => {
         switch(clickedBut) {
             case 'small':
@@ -28,7 +30,8 @@ export default function MainPage() {
                     bigCards: true,
                     smallCards: false,
                 }
-            default: throw new Error('Card Sizes Error')
+            default: 
+                return curState;
         }
     }
     const [curCardState, dispatchCurState] = useReducer(chooseBut, {
@@ -63,7 +66,7 @@ export default function MainPage() {
         setSortMethod(event.target.value);
         sortProducts(event.target.value, true)
     }
-    const getFilters = (newFilters:IFilters) => {
+    const getFilters = (newFilters:FiltersType) => {
         setFilters({...filters, ...newFilters});
         sortProducts(sortMethod, true);
     }
@@ -74,6 +77,9 @@ export default function MainPage() {
         }
         if(searchFilter) {
             setSearchFilter('')
+        }
+        if(sortMethod !== 'high-rate') {
+            setSortMethod('high-rate')
         }
     }
     const getFilteredProducts = () => {
@@ -160,6 +166,12 @@ export default function MainPage() {
     const memoGetFilteredProducts = useCallback(getFilteredProducts, [filters, products, searchFilter])
     const memoSortProducts = useCallback(sortProducts, [shownProducts, sortMethod, canSort])
 
+
+    useEffect(memoSortProducts, [memoSortProducts])
+    useEffect(memoGetFilteredProducts, [memoGetFilteredProducts])
+
+
+    // const [linkOfFiltersState, setLinkOfFiltersState] = useState<LinkOfFilters>()
     useEffect(() => {
         async function fetchProductsFunc() {
             const res:Product[] = await fetch('https://dummyjson.com/products?limit=100').then(result=>result.json()).then(data => data.products);
@@ -168,14 +180,45 @@ export default function MainPage() {
         }
         fetchProductsFunc();
     }, [])
-    useEffect(memoSortProducts, [memoSortProducts])
-    useEffect(memoGetFilteredProducts, [memoGetFilteredProducts])
+    // useEffect(() => {
+    //     const linkOfFilters:LinkOfFilters = { 
+    //         linkFilters:  {
+    //             'Brand': ["APPLE"],
+    //             'Category': ["SMARTPHONES"],
+    //             'Price': [200, 1600],
+    //             'Stock': [2, 150]
+    //         },
+    //         linkSearch: 'i',
+    //         linkSort: 'low-rate',
+    //         linkCardSize: 'big'
+    //     }
+
+    //     if(linkOfFilters) {
+    //         setLinkOfFiltersState(linkOfFilters)
+    //     }
+    // }, [])
+    // useEffect(() => {
+    //     if(linkOfFiltersState) {
+    //         setFilters(linkOfFiltersState.linkFilters);
+    //         setSearchFilter(linkOfFiltersState.linkSearch)
+    //         setSortMethod(linkOfFiltersState.linkSort);
+    //         setCanSort(true)
+    //         dispatchCurState(linkOfFiltersState.linkCardSize)
+    //         setLinkOfFiltersState(undefined)
+    //     }
+    // }, [linkOfFiltersState])
 
     return (
         <section className={styles.MainPage}>
             {products
             ?<div className={styles.wrapper}>
-                <Filters products={products} getFilters={getFilters} resetFilters={resetFilters} newProducts={shownProducts}/>
+                <Filters 
+                    defaultProducts={products} 
+                    filteredProducts={shownProducts}
+                    getFilters={getFilters} 
+                    resetFilters={resetFilters}
+                    filters={filters} 
+                />
                 <div className={styles.productsContainer}>
                     <div className={styles.productsUIBar}>
                         <input 
@@ -187,7 +230,7 @@ export default function MainPage() {
                                 (event:React.ChangeEvent<HTMLInputElement>) => setSearchFilter(event.target.value)
                             }
                         />
-                        <SortInput callback={getSortMethod}/>
+                        <SortInput callback={getSortMethod} defaultValue={sortMethod}/>
                         <div className={styles.UIBarButtonsContainer}>
                             <button 
                                 className={`${styles.UIBarButton}\n${curCardState.smallCards ? styles.UIBarButtonInactive: ''}`} 

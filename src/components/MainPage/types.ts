@@ -12,7 +12,7 @@ export interface Product {
     images: string[];
 };
 
-export interface IFilters {
+export interface FiltersType {
     'Brand'?: string[];
     'Category'?: string[];
     'Stock'?: [number, number];
@@ -22,4 +22,11 @@ export interface IFilters {
 export interface CardSizes {
     bigCards: boolean;
     smallCards: boolean;
+}
+
+export interface LinkOfFilters {
+    linkFilters:FiltersType;
+    linkSearch: string;
+    linkSort: string
+    linkCardSize: string;
 }

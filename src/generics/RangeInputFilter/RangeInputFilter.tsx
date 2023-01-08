@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GenericRangeInputFilter } from "./types";
 import styles from "./styles.module.scss";
 
-export default function RangeInputFilter({min, max, title, changeFilters, minValue, maxValue}: GenericRangeInputFilter) {
+export default function RangeInputFilter({min, max, title,  changeFilters, minValue, maxValue}: GenericRangeInputFilter) {
     const gap = Math.floor(max / 18);
     const [canFind, setCanFind] = useState<boolean>(true);
     const [minValueState, setMinValueState] = useState(minValue);
@@ -71,15 +71,15 @@ export default function RangeInputFilter({min, max, title, changeFilters, minVal
     return (
         <div className={styles.Container}>
             <div className={styles.spanContainer}>
-                {canFind ?
-                    <><span>{minValueState}</span>—<span>{maxValueState}</span></> :
-                    <div className={styles.NoProdCont}>No products found!</div>
+                {canFind 
+                    ? <><span>{minValueState}</span>—<span>{maxValueState}</span></> 
+                    : <div className={styles.NoProdCont}>No products found!</div>
                 }
             </div>
             <div className={styles.inputContainer}>
                 <div className={styles.sliderTrack} style={fillRange}/>
-                <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMin} value={minValueState} />
-                <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMax} value={maxValueState} />
+                <input className={styles.input} type="range" min={min} max={max}  onChange={onChangeMin} value={minValueState}/>
+                <input className={styles.input} type="range" min={min} max={max} onChange={onChangeMax} value={maxValueState}/>
             </div>
         </div>
     )
