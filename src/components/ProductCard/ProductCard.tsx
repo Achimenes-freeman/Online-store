@@ -1,15 +1,17 @@
+import { Link } from "react-router-dom";
 import { ProductCardProps } from "./types";
 import styles from './styles.module.scss';
+
 
 export default function ProductCard({product, cardSize}:ProductCardProps) {
     
     return(
         <div className={`${styles.CardCont}\n${cardSize.smallCards ? styles.CardContSmall : styles.CardContBig}`}>
-            <a className={styles.cardImgCont} href='/#'>
+            <Link className={styles.cardImgCont} to={`/${product.id}`}>
                 <img className={styles.cardImg} src={product.thumbnail} alt={product.title} />
-            </a>
+            </Link>
             <div className={styles.textCont}>
-                <a className={styles.title} href='/#'>{product.title}</a>
+                <Link className={styles.title} to={`/${product.id}`}>{product.title}</Link>
                 <p className={styles.description}>{product.category}</p>
             </div>
             {
