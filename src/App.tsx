@@ -1,16 +1,15 @@
-import styles from './App.module.scss';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-import MainPage from './components/MainPage/MainPage';
+import { Routes, Route } from 'react-router-dom';
+import ProductPage from './components/ProductPage/ProductPage';
+import { Layout } from './components/Layout/Layout';
 
 function App() {
     return (
-        <div className={styles.App} >
-            <Header />
-            <MainPage />
-            <Footer />
-        </div>
-    )
+        <Routes>
+            <Route path="/" element={<Layout />}>
+                <Route path="/:productId" element={<ProductPage />} />
+            </Route>
+        </Routes>
+    );
 }
 
 export default App;
