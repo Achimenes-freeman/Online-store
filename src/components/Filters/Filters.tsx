@@ -19,6 +19,9 @@ export default function Filters({defaultProducts, filteredProducts, getFilters, 
     const setResetFalse = () => {
         setResetState(false)
     }
+    const copyQueryLink = () => {
+        navigator.clipboard.writeText(window.location.href)
+    }
     
     return (
         <aside className={styles.FiltersContainer}>
@@ -60,7 +63,10 @@ export default function Filters({defaultProducts, filteredProducts, getFilters, 
                 changeFilters={updateFilters} 
                 currentFilters={filters?.Stock}
             />
-            <button className={styles.resetBut} type='button' onClick={resetAllFilters}>Reset filters</button>
+            <div className={styles.buttonsCont} >
+                <button className={styles.resetBut} type='button' onClick={resetAllFilters}>Reset filters</button>
+                <button className={styles.copyBut} type='button' onClick={copyQueryLink}>Copy link</button>
+            </div>
         </aside>
     )
 }
