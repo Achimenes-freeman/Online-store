@@ -14,7 +14,7 @@ export default function RangeFilter({defaultProducts, filteredProducts, type, ch
     const max = Math.max(...(defaultProducts.map(product => product[type])));
     return(
         <div className={styles.rangeContainer}>
-                <h3 className={styles.rangeHeading}>Price</h3>
+                <h3 className={styles.rangeHeading}>{rangeType}</h3>
                 <RangeInputFilter 
                     min={min} 
                     max={max} 

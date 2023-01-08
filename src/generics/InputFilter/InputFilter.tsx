@@ -6,6 +6,11 @@ export default function InputFilter({isReset = false, setResetFalse, callback, t
 
     const [checkState, setCheckState] = useState(checked);
     useEffect(() => {
+        if(checkState !== checked) {
+            setCheckState(checked)
+        }
+    }, [checked,checkState])
+    useEffect(() => {
         if(isReset) {
             setCheckState(false)
             setResetFalse();

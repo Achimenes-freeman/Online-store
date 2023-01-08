@@ -4,10 +4,15 @@ import styles from './styles.module.scss';
 import { CheckboxFilterProps, FiltersArr, ICheckboxFilters } from './types';
 
 export default function CheckboxFilter({defaultProducts, filteredProducts, prop, title, isReset, setResetFalse, changeFilters, currentFilters = []}:CheckboxFilterProps) {
+    const [checkboxFilters, setCheckboxFilters] = useState<ICheckboxFilters>(currentFilters)
     const defaultProductsMap = new Map();
     const filteredProductsMap = new Map();
     let filters:FiltersArr = []
-    
+    useEffect(() => {
+        if(checkboxFilters.sort().join('') !== currentFilters.sort().join()) {
+            setCheckboxFilters(currentFilters); 
+        }
+    }, [currentFilters, checkboxFilters])
     defaultProducts.map(item => item[prop].toString().toUpperCase()).forEach(item => {
         if(defaultProductsMap.has(item)) {
             const newValue = defaultProductsMap.get(item)[0] + 1;
@@ -25,7 +30,7 @@ export default function CheckboxFilter({defaultProducts, filteredProducts, prop,
         }
     })
     Array.from(defaultProductsMap.keys()).forEach(key => {
-        const isChecked = currentFilters.includes(key);
+        const isChecked = currentFilters.length ? currentFilters.includes(key) : false;
         if(!filteredProductsMap.has(key)) {
             const newValue = defaultProductsMap.get(key)[1];
             filteredProductsMap.set(key, [0, newValue, isChecked])
@@ -36,8 +41,6 @@ export default function CheckboxFilter({defaultProducts, filteredProducts, prop,
         }
     })
     filters = Array.from(filteredProductsMap.entries()).sort((a, b) => a[0].localeCompare(b[0]));
-
-    const [checkboxFilters, setCheckboxFilters] = useState<ICheckboxFilters>(currentFilters)
 
     const onCheck = (filterName: string) => {
         let resFilters:ICheckboxFilters = [...checkboxFilters]

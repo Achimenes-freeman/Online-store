@@ -1,7 +1,8 @@
 import {useState, useEffect, useCallback, useReducer} from 'react';
+import { useSearchParams } from 'react-router-dom';
 import SortInput from '../../generics/SortInput/SortInput';
 import styles from './styles.module.scss';
-import { CardSizes, FiltersType, Product } from './types';
+import { CardSizes, FiltersType, LinkOfFilters, Product } from './types';
 import Filters from '../Filters/Filters'
 import SPLink from '../../assets/icons/small-products-icon.svg';
 import BPLink from '../../assets/icons/big-products-icon.svg';
@@ -15,6 +16,8 @@ export default function MainPage() {
     const [searchFilter, setSearchFilter] = useState<string>('');
     const [sortMethod, setSortMethod] = useState<string>('high-rate');
     const [canSort, setCanSort] = useState<boolean>(true);
+    const [queryFilters, setQueryFilters] = useSearchParams();
+    const [linkOfFiltersState, setLinkOfFiltersState] = useState<LinkOfFilters>()
 
     const chooseBut = (curState:CardSizes, clickedBut:string) => {
         switch(clickedBut) {
@@ -65,9 +68,18 @@ export default function MainPage() {
     const getSortMethod = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortMethod(event.target.value);
         sortProducts(event.target.value, true)
+        setQueryFilters({...Object.fromEntries(queryFilters.entries()), 'sort': event.target.value})
     }
     const getFilters = (newFilters:FiltersType) => {
+        const filterType: string = Object.keys(newFilters)[0]
         setFilters({...filters, ...newFilters});
+        if(Object.values(newFilters).join(',')) {
+            setQueryFilters({...Object.fromEntries(queryFilters.entries()), [Object.keys(newFilters)[0]]: Object.values(newFilters).join(',')})
+        } else {
+            queryFilters.delete(filterType)
+            setQueryFilters(queryFilters)
+        }
+        
         sortProducts(sortMethod, true);
     }
     const resetFilters = () => {
@@ -81,6 +93,7 @@ export default function MainPage() {
         if(sortMethod !== 'high-rate') {
             setSortMethod('high-rate')
         }
+        setQueryFilters()
     }
     const getFilteredProducts = () => {
         if(products) {
@@ -170,8 +183,6 @@ export default function MainPage() {
     useEffect(memoSortProducts, [memoSortProducts])
     useEffect(memoGetFilteredProducts, [memoGetFilteredProducts])
 
-
-    // const [linkOfFiltersState, setLinkOfFiltersState] = useState<LinkOfFilters>()
     useEffect(() => {
         async function fetchProductsFunc() {
             const res:Product[] = await fetch('https://dummyjson.com/products?limit=100').then(result=>result.json()).then(data => data.products);
@@ -180,33 +191,32 @@ export default function MainPage() {
         }
         fetchProductsFunc();
     }, [])
-    // useEffect(() => {
-    //     const linkOfFilters:LinkOfFilters = { 
-    //         linkFilters:  {
-    //             'Brand': ["APPLE"],
-    //             'Category': ["SMARTPHONES"],
-    //             'Price': [200, 1600],
-    //             'Stock': [2, 150]
-    //         },
-    //         linkSearch: 'i',
-    //         linkSort: 'low-rate',
-    //         linkCardSize: 'big'
-    //     }
-
-    //     if(linkOfFilters) {
-    //         setLinkOfFiltersState(linkOfFilters)
-    //     }
-    // }, [])
-    // useEffect(() => {
-    //     if(linkOfFiltersState) {
-    //         setFilters(linkOfFiltersState.linkFilters);
-    //         setSearchFilter(linkOfFiltersState.linkSearch)
-    //         setSortMethod(linkOfFiltersState.linkSort);
-    //         setCanSort(true)
-    //         dispatchCurState(linkOfFiltersState.linkCardSize)
-    //         setLinkOfFiltersState(undefined)
-    //     }
-    // }, [linkOfFiltersState])
+    useEffect(() => {
+        const linkOfFilters:LinkOfFilters = { 
+            linkFilters:  {
+                'Brand': queryFilters.get('Brand')?.split(','),
+                'Category': queryFilters.get('Category')?.split(','),
+                'Price': queryFilters.get('Price')?.split(',').map(num => Number(num)),
+                'Stock': queryFilters.get('Stock')?.split(',').map(num => Number(num))
+            },
+            linkSearch:  queryFilters.get('search'),
+            linkSort: queryFilters.get('sort'),
+            linkCardSize: queryFilters.get('size')
+        }
+        if(linkOfFilters) {
+            setLinkOfFiltersState(linkOfFilters)
+        }
+    }, [queryFilters])
+    useEffect(() => {
+        if(linkOfFiltersState) {
+            if(linkOfFiltersState.linkFilters) setFilters(linkOfFiltersState.linkFilters);
+            if(linkOfFiltersState.linkSearch) setSearchFilter(linkOfFiltersState.linkSearch)
+            if(linkOfFiltersState.linkSort) setSortMethod(linkOfFiltersState.linkSort);
+            if(linkOfFiltersState.linkCardSize) dispatchCurState(linkOfFiltersState.linkCardSize)
+            setCanSort(true)
+            setLinkOfFiltersState(undefined)
+        }
+    }, [linkOfFiltersState])
 
     return (
         <section className={styles.MainPage}>
@@ -227,7 +237,15 @@ export default function MainPage() {
                             placeholder='Search...' 
                             value={searchFilter} 
                             onChange={
-                                (event:React.ChangeEvent<HTMLInputElement>) => setSearchFilter(event.target.value)
+                                (event:React.ChangeEvent<HTMLInputElement>) => {
+                                    setSearchFilter(event.target.value)
+                                    if(event.target.value === '') {
+                                        queryFilters.delete('search')
+                                        setQueryFilters(queryFilters)
+                                    } else {
+                                        setQueryFilters({...Object.fromEntries(queryFilters.entries()) , 'search': event.target.value})
+                                    }
+                                }
                             }
                         />
                         <SortInput callback={getSortMethod} defaultValue={sortMethod}/>
@@ -235,14 +253,20 @@ export default function MainPage() {
                             <button 
                                 className={`${styles.UIBarButton}\n${curCardState.smallCards ? styles.UIBarButtonInactive: ''}`} 
                                 type='button' 
-                                onClick={() => dispatchCurState('big')}
+                                onClick={() => {
+                                    dispatchCurState('big')
+                                    setQueryFilters({...Object.fromEntries(queryFilters.entries()), 'size': 'big'})
+                                }}
                             >
                                 <img className={styles.UIBarButtonImg} src={BPLink} alt="BP" />
                             </button>
                             <button 
                                 className={`${styles.UIBarButton}\n${curCardState.bigCards ? styles.UIBarButtonInactive : ''}`} 
                                 type='button' 
-                                onClick={() => dispatchCurState('small')}
+                                onClick={() => {
+                                    dispatchCurState('small')
+                                    setQueryFilters({...Object.fromEntries(queryFilters.entries()), 'size': 'small'})
+                                }}
                             >
                                 <img className={styles.UIBarButtonImg} src={SPLink} alt="SP" />
                             </button>

@@ -6,5 +6,5 @@ export interface RangeFilterProps {
     filteredProducts: Product[];
     type: 'price' | 'stock';
     changeFilters: (filterName: FilterNames, filterValue:FilterTypes) => void;
-    currentFilters: [number, number] | undefined
+    currentFilters: number[] | undefined
 }

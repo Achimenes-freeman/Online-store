@@ -15,8 +15,8 @@ export interface Product {
 export interface FiltersType {
     'Brand'?: string[];
     'Category'?: string[];
-    'Stock'?: [number, number];
-    'Price'?: [number, number];
+    'Stock'?: number[];
+    'Price'?: number[];
 }
 
 export interface CardSizes {
@@ -25,8 +25,8 @@ export interface CardSizes {
 }
 
 export interface LinkOfFilters {
-    linkFilters:FiltersType;
-    linkSearch: string;
-    linkSort: string
-    linkCardSize: string;
+    linkFilters:FiltersType | null;
+    linkSearch: string | null;
+    linkSort: string | null;
+    linkCardSize: string | null;
 }
