@@ -248,6 +248,7 @@ export default function MainPage() {
                                 }
                             }
                         />
+                        <span className={styles.UIBarProductsFound}>Found: {shownProducts.length}</span>
                         <SortInput callback={getSortMethod} defaultValue={sortMethod}/>
                         <div className={styles.UIBarButtonsContainer}>
                             <button 
