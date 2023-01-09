@@ -3,7 +3,7 @@ import { ProductCardProps } from "./types";
 import styles from './styles.module.scss';
 
 
-export default function ProductCard({product, cardSize}:ProductCardProps) {
+export default function ProductCard({product, cardSize, openModal}:ProductCardProps) {
     
     return(
         <div className={`${styles.CardCont}\n${cardSize.smallCards ? styles.CardContSmall : styles.CardContBig}`}>
@@ -23,7 +23,7 @@ export default function ProductCard({product, cardSize}:ProductCardProps) {
             }
             <div className={styles.buttonCont}>
                 <button className={`${styles.buttons}\n${styles.buttonAdd}`} type="button">{`Add €${product.price}`}</button>
-                <button className={styles.buttons} type="button">Buy now</button>
+                <button className={styles.buttons} type="button" onClick={openModal}>Buy now</button>
             </div>
         </div>
     )

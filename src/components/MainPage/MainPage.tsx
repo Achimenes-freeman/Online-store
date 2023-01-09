@@ -7,6 +7,7 @@ import Filters from '../Filters/Filters'
 import SPLink from '../../assets/icons/small-products-icon.svg';
 import BPLink from '../../assets/icons/big-products-icon.svg';
 import ProductCardsList from '../ProductCardsList/ProductCardsList';
+import ModalWindow from '../ModalWindow/ModalWindow';
 
 export default function MainPage() {
     const [products, setProducts] = useState<Product[]>();
@@ -18,7 +19,7 @@ export default function MainPage() {
     const [canSort, setCanSort] = useState<boolean>(true);
     const [queryFilters, setQueryFilters] = useSearchParams();
     const [linkOfFiltersState, setLinkOfFiltersState] = useState<LinkOfFilters>()
-
+    const [modalWindowState, setModalWindowState] = useState(false)
     const chooseBut = (curState:CardSizes, clickedBut:string) => {
         switch(clickedBut) {
             case 'small':
@@ -218,6 +219,13 @@ export default function MainPage() {
         }
     }, [linkOfFiltersState])
 
+    const openModal = () => {
+        setModalWindowState(true);
+    }
+    const closeModal = () => {
+        setModalWindowState(false)
+    }
+
     return (
         <section className={styles.MainPage}>
             {products
@@ -273,10 +281,11 @@ export default function MainPage() {
                             </button>
                         </div>
                     </div>
-                    <ProductCardsList products={shownProducts} cardSize={curCardState}/>
+                    <ProductCardsList products={shownProducts} cardSize={curCardState} openModal={openModal}/>
                 </div>
             </div>
             : 'Loading...'}
+            {modalWindowState && <ModalWindow closeModal={closeModal} resetFilters={resetFilters}/>}
         </section>
     )
 }
