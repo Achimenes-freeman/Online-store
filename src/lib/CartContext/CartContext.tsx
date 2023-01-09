@@ -4,16 +4,24 @@ import { ICartData } from './types';
 
 interface ICartContext {
     cartData: ICartData;
+    modalState: boolean;
     addProductToCart: (productId: number, price: number) => void;
     deleteProductFromCart: (productId: number) => void;
+    clearProductFromCart: () => void;
     changeProductAmount: (productId: number, amount: number) => void;
+    closeModal: () => void;
+    openModal: () => void;
 }
 
 export const CartContext = React.createContext<ICartContext>({
     cartData: {},
+    modalState: false,
     addProductToCart: () => {},
     deleteProductFromCart: () => {},
     changeProductAmount: () => {},
+    clearProductFromCart: () => {},
+    closeModal: () => {},
+    openModal: () => {}
 });
 
 export function CartContextProvider({
@@ -22,6 +30,14 @@ export function CartContextProvider({
     children: React.ReactNode;
 }) {
     const [cartData, setCartData] = useState<ICartData>({});
+    const [modalState, setModalState] = useState(false);
+
+    const closeModal = () => {
+        setModalState(false)
+    }
+    const openModal = () => {
+        setModalState(true)
+    }
 
     useEffect(() => {
         setCartData(JSON.parse(localStorage.getItem('cart-data') || '{}'));
@@ -51,6 +67,11 @@ export function CartContextProvider({
         [cartData]
     );
 
+    const clearProductFromCart = useCallback(() => {
+        changeLocalStorage({});
+        setCartData({});
+    }, [])
+
     const changeProductAmount = useCallback(
         (productId: number, amount: number) => {
             cartData[productId].amount = amount;
@@ -64,11 +85,15 @@ export function CartContextProvider({
     const cartContextValue: ICartContext = useMemo(
         () => ({
             cartData,
+            modalState,
             addProductToCart,
             deleteProductFromCart,
             changeProductAmount,
+            clearProductFromCart,
+            closeModal,
+            openModal
         }),
-        [cartData, addProductToCart, deleteProductFromCart, changeProductAmount]
+        [cartData, modalState, addProductToCart, clearProductFromCart, deleteProductFromCart, changeProductAmount]
     );
 
     return (
