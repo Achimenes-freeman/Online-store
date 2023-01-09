@@ -1,0 +1,9 @@
+@import '../../variables.scss';
+
+.ProductPage {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    max-width: 1600px;
+    width: 100%;
+}

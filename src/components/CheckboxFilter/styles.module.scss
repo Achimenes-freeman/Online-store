@@ -1,0 +1,38 @@
+@import '../../variables.scss';
+
+.Container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 3px;
+    height: 200px;
+    width: 95%;
+    margin-top: 20px;
+}
+
+.title {
+    margin: 0;
+    padding: 0;
+}
+
+.checkboxContainer {
+    overflow-y: scroll;
+    border-top: 1px solid $blue-bg;
+    border-bottom: 1px solid $blue-bg;
+    width: 100%;
+    &::-webkit-scrollbar {
+        appearance: none;
+        width: 15px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $gray-blue-bg;
+        border-radius: 15px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 15px;
+        background-color: $blue-bg;
+    }
+}
