@@ -11,7 +11,7 @@ function ProductPage() {
 
     const navigate = useNavigate();
 
-    if (typeof productId !== 'number' || productId > 100) {
+    if (Number(productId) > 100 || Number.isNaN(Number(productId))) {
         navigate('/notfound/404');
     }
     const [product, setProduct] = useState<IProductData>();
