@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
+import { redirect } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { ModalWindowProps, ValidateModalInterface } from './types';
 import defCardImg from '../../assets/images/default-card.jpg'
 import visaCardImg from '../../assets/icons/visa-card.svg'
 import mcCardImg from '../../assets/icons/mastercard-card.svg'
 import mirLogo from '../../assets/icons/mir-logo.svg';
-
-
 
 export default function ModalWindow({closeModal, resetFilters}: ModalWindowProps) {
     const [validateModal, setValidateModal] = useState<ValidateModalInterface>({
@@ -123,6 +122,7 @@ export default function ModalWindow({closeModal, resetFilters}: ModalWindowProps
                 if(resetFilters) {
                     resetFilters()
                 }
+                redirect('/');
             }
         }
     }, [counter, timer, closeModal, resetFilters])
