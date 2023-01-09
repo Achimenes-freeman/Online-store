@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { CartContext } from '../../lib/CartContext/CartContext';
 
 import { InfoIcons } from '../InfoIcons/InfoIcons';
@@ -26,10 +26,9 @@ export function CartProduct({
     );
     const [cost, setCost] = useState(product.price * amount);
 
-    useEffect(() => {
-        console.log('hi');
-        localStorage.setItem('cart-data', JSON.stringify(cartData));
-    }, [cartData]);
+    // useEffect(() => {
+    //     localStorage.setItem('cart-data', JSON.stringify(cartData));
+    // }, [cartData]);
 
     const incProduct = () => {
         if (product.stock > amount) {

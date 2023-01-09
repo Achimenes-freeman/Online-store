@@ -22,19 +22,21 @@ export function CartContextProvider({
     children: React.ReactNode;
 }) {
     const [cartData, setCartData] = useState<ICartData>({});
-    // const [totalPrice, setTotalPrice] = useState<number>(0);
 
     useEffect(() => {
         setCartData(JSON.parse(localStorage.getItem('cart-data') || '{}'));
     }, []);
 
-    // useEffect(() => {
-    //     localStorage.setItem('cart-data', JSON.stringify(cartData));
-    // }, [cartData]);
+    const changeLocalStorage = (data: ICartData) => {
+        localStorage.setItem('cart-data', JSON.stringify(data));
+    };
 
     const addProductToCart = useCallback(
         (productId: number, price: number) => {
-            setCartData({ ...cartData, [productId]: { amount: 1, price } });
+            const obj = { ...cartData, [productId]: { amount: 1, price } };
+            changeLocalStorage(obj);
+
+            setCartData(obj);
         },
         [cartData]
     );
@@ -43,6 +45,7 @@ export function CartContextProvider({
         (productId: number) => {
             delete cartData[productId];
             const obj = { ...cartData };
+            changeLocalStorage(obj);
             setCartData(obj);
         },
         [cartData]
@@ -52,7 +55,7 @@ export function CartContextProvider({
         (productId: number, amount: number) => {
             cartData[productId].amount = amount;
             const obj = { ...cartData };
-
+            changeLocalStorage(obj);
             setCartData(obj);
         },
         [cartData]

@@ -15,23 +15,26 @@ function Products({ totalPrice }: ICartProducts) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        setLoading(true);
-        Promise.all(
-            Object.keys(cartData).map((item) =>
-                fetch(`https://dummyjson.com/products/${item}`)
+        if (loading) {
+            Promise.all(
+                Object.keys(cartData).map((item) =>
+                    fetch(`https://dummyjson.com/products/${item}`)
+                )
             )
-        )
-            .then((values) => Promise.all(values.map((item) => item.json())))
-            .then((values) => {
-                setProductsData(
-                    values.map((item) => ({
-                        ...item,
-                        amount: cartData[item.id].amount,
-                    }))
-                );
-                setLoading(false);
-            });
-    }, []);
+                .then((values) =>
+                    Promise.all(values.map((item) => item.json()))
+                )
+                .then((values) => {
+                    setProductsData(
+                        values.map((item) => ({
+                            ...item,
+                            amount: cartData[item.id].amount,
+                        }))
+                    );
+                    setLoading(false);
+                });
+        }
+    }, [cartData, loading]);
 
     const changeProductData = (productId: number) => {
         const arr = productsData.filter((item) => item.id !== productId);
@@ -57,6 +60,7 @@ function Products({ totalPrice }: ICartProducts) {
                             productData={item}
                             index={index + 1}
                             changeProductData={changeProductData}
+                            key={item.id}
                         />
                     ))}
             </div>
@@ -99,12 +103,21 @@ function Products({ totalPrice }: ICartProducts) {
 export function CartPage() {
     const { cartData } = useContext(CartContext);
 
-    const [totalPrice] = useState(
+    const [totalPrice, setTotalPrice] = useState(
         Object.values(cartData).reduce(
             (sum, { amount, price }) => sum + amount * price,
             0
         )
     );
+
+    useEffect(() => {
+        setTotalPrice(
+            Object.values(cartData).reduce(
+                (sum, { amount, price }) => sum + amount * price,
+                0
+            )
+        );
+    }, [cartData]);
 
     return Object.keys(cartData).length ? (
         <Products totalPrice={totalPrice} />
