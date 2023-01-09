@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Product from '../Product/Product';
 
+import Product from '../Product/Product';
 import { IProductData } from './types';
 
 import styles from './style.module.scss';
@@ -9,6 +9,11 @@ import styles from './style.module.scss';
 function ProductPage() {
     const { productId } = useParams();
 
+    const navigate = useNavigate();
+
+    if (typeof productId !== 'number' || productId > 100) {
+        navigate('/notfound/404');
+    }
     const [product, setProduct] = useState<IProductData>();
 
     useEffect(() => {
