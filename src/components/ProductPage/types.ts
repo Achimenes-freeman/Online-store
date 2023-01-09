@@ -14,6 +14,7 @@ export interface IProductData {
     category: string;
     thumbnail: ProductThumbnail;
     images: ProductImages;
+    amount?: number;
 }
 
 export interface IProductPageProps {

@@ -1,14 +1,11 @@
 import ClassNames from 'classnames';
 
 import ProductImages from '../ProductImages/ProductImages';
-
+import { InfoIcons } from '../InfoIcons/InfoIcons';
 import Button from '../../generics/Button/Button';
 import { IProductData } from '../ProductPage/types';
 
 import styles from './style.module.scss';
-import RateIcon from '../../assets/icons/Rating.svg';
-import CategoryIcon from '../../assets/icons/Category.svg';
-import StockIcon from '../../assets/icons/Stock.svg';
 
 function Product(props: IProductData) {
     const {
@@ -41,37 +38,12 @@ function Product(props: IProductData) {
                 </div>
 
                 <p className={styles.infoDescription}>{description}</p>
-
-                <div
-                    className={ClassNames(styles.infoContainer, styles.infoRSC)}
-                >
-                    <div className={styles.infoRSCItem}>
-                        <img
-                            className={styles.infoRSCIcon}
-                            src={RateIcon}
-                            alt=""
-                        />
-                        <p className={styles.infoRSCText}>{rating}</p>
-                    </div>
-                    <div className={styles.infoRSCItem}>
-                        <img
-                            className={styles.infoRSCIcon}
-                            src={StockIcon}
-                            alt=""
-                        />
-                        <p className={styles.infoRSCText}>
-                            <span className={styles.fwRegular}>Stock:</span>{' '}
-                            {stock}
-                        </p>
-                    </div>
-                    <div className={styles.infoRSCItem}>
-                        <img
-                            className={styles.infoRSCIcon}
-                            src={CategoryIcon}
-                            alt=""
-                        />
-                        <p className={styles.infoRSCText}>{category}</p>
-                    </div>
+                <div className={styles.infoContainer}>
+                    <InfoIcons
+                        rating={rating}
+                        stock={stock}
+                        category={category}
+                    />
                 </div>
 
                 <div className={ClassNames(styles.infoContainer, styles.price)}>

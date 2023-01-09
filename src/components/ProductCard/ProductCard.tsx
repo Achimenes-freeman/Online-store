@@ -1,30 +1,70 @@
-import { Link } from "react-router-dom";
-import { ProductCardProps } from "./types";
+import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { CartContext } from '../../lib/CartContext/CartContext';
+import { ProductCardProps } from './types';
 import styles from './styles.module.scss';
 
+export default function ProductCard({ product, cardSize }: ProductCardProps) {
+    const { addProductToCart, deleteProductFromCart, cartData, openModal } = useContext(CartContext);
+    const [inCart, setInCart] = useState(Boolean(Array.from(Object.keys(cartData)).filter(item => Number(item) === product.id).length));
 
-export default function ProductCard({product, cardSize, openModal}:ProductCardProps) {
-    
-    return(
-        <div className={`${styles.CardCont}\n${cardSize.smallCards ? styles.CardContSmall : styles.CardContBig}`}>
+    const addProduct = () => {
+        addProductToCart(product.id, product.price);
+        setInCart(true);
+    }
+    const deleteProduct = () => {
+        deleteProductFromCart(product.id);
+        setInCart(false)
+    }
+    const buyProduct = () => {
+        addProductToCart(product.id, product.price);
+        setInCart(true);
+        openModal()
+    }
+
+    return (
+        <div
+            className={`${styles.CardCont}\n${
+                cardSize.smallCards ? styles.CardContSmall : styles.CardContBig
+            }`}
+        >
             <Link className={styles.cardImgCont} to={`/${product.id}`}>
-                <img className={styles.cardImg} src={product.thumbnail} alt={product.title} />
+                <img
+                    className={styles.cardImg}
+                    src={product.thumbnail}
+                    alt={product.title}
+                />
             </Link>
             <div className={styles.textCont}>
-                <Link className={styles.title} to={`/${product.id}`}>{product.title}</Link>
+                <Link className={styles.title} to={`/${product.id}`}>
+                    {product.title}
+                </Link>
                 <p className={styles.description}>{product.category}</p>
             </div>
-            {
-                cardSize.bigCards && 
+            {cardSize.bigCards && (
                 <div className={styles.infoCont}>
-                    <p className={styles.infoRate}>Rating: <span>★{product.rating}</span></p>
-                    <p className={styles.infoStock}>Stock: <span>{product.stock}</span></p>
+                    <p className={styles.infoRate}>
+                        Rating: <span>★{product.rating}</span>
+                    </p>
+                    <p className={styles.infoStock}>
+                        Stock: <span>{product.stock}</span>
+                    </p>
                 </div>
-            }
+            )}
             <div className={styles.buttonCont}>
-                <button className={`${styles.buttons}\n${styles.buttonAdd}`} type="button">{`Add €${product.price}`}</button>
-                <button className={styles.buttons} type="button" onClick={openModal}>Buy now</button>
+                <button className={`${styles.buttons}\n${styles.buttonAdd}`} 
+                    onClick={inCart ? deleteProduct : addProduct} 
+                    type="button"
+                >
+                    {inCart
+                        ? `Drop from cart`
+                        : `Add €${product.price}`
+                    }
+                </button>
+                <Link className={`${styles.buttons}\n${styles.buttonLink}`} to='/cart' onClick={buyProduct}>
+                    Buy now
+                </Link>
             </div>
         </div>
-    )
+    );
 }

@@ -30,7 +30,12 @@ export default function Header({
                     Total Count:{' '}
                     <span className={styles.cartTotalSpan}>€{totalCount}</span>
                 </div>
-                <Cart productsAmount={productsCount} callback={cartCallback} />
+                <Link className={styles.link} to="/cart">
+                    <Cart
+                        productsAmount={productsCount}
+                        callback={cartCallback}
+                    />
+                </Link>
             </div>
         </header>
     );

@@ -1,6 +1,6 @@
 export interface ModalWindowProps {
     closeModal: () => void;
-    resetFilters?: () => void;
+    clearCart: () => void;
 }
 
 export interface ValidateModalInterface {

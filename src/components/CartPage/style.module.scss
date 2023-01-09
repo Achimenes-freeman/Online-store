@@ -1,0 +1,101 @@
+@import '../../variables.scss';
+
+.CartPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1600px;
+    width: 100%;
+    padding: 50px 0;
+}
+
+.sideTitle {
+    background-color: $gray-blue-bg;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px 15px;
+}
+.Title {
+    font-size: 1.8rem;
+    color: $black-text;
+    text-transform: capitalize;
+}
+.products {
+    flex-basis: 68%;
+    border-radius: 10px;
+    background-color: rgb(247, 247, 247);
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input {
+    font-size: 1.2rem;
+    margin-right: 10px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.summary {
+    flex-basis: 30%;
+    border-radius: 10px;
+    overflow: hidden;
+
+    &Info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+
+        background-color: rgb(247, 247, 247);
+    }
+
+    &Par {
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+    }
+}
+
+.blueText {
+    color: $blue-bg;
+    font-weight: 700;
+}
+
+.inputPromo {
+    min-width: 80%;
+    padding: 10px 10px;
+    margin-bottom: 40px;
+
+    border-radius: 100px;
+    border: 2px solid rgb(166, 166, 166);
+
+    font-size: 1.4rem;
+
+    &:focus {
+        outline: none;
+        border-color: $blue-bg;
+
+        &::placeholder {
+            color: $blue-bg;
+            opacity: 0.5;
+        }
+    }
+
+    &::placeholder {
+        color: rgb(166, 166, 166);
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-size: 3rem;
+}
