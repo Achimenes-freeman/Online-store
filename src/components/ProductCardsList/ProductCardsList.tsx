@@ -6,7 +6,7 @@ export default function ProductCardsList({products, cardSize}: ProductCardsListP
     if(products.length) {
         return (
         <div className={`${styles.ProductsList}\n${cardSize.smallCards ? styles.productsListSmall : styles.productsListBig}`}>
-            {products.map(product => <ProductCard key={product.id} product={product} cardSize={cardSize}/>)}
+            {products.map(product => <ProductCard key={product.id} product={product} cardSize={cardSize} />)}
         </div>)
     }
     return (

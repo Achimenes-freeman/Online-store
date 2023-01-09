@@ -1,5 +1,6 @@
 import ClassNames from 'classnames';
-
+import { useContext } from 'react';
+import { CartContext } from '../../lib/CartContext/CartContext';
 import ProductImages from '../ProductImages/ProductImages';
 import { InfoIcons } from '../InfoIcons/InfoIcons';
 import Button from '../../generics/Button/Button';
@@ -8,7 +9,10 @@ import { IProductData } from '../ProductPage/types';
 import styles from './style.module.scss';
 
 function Product(props: IProductData) {
+    const { addProductToCart, openModal } = useContext(CartContext);
+
     const {
+        id,
         title,
         description,
         price,
@@ -48,8 +52,13 @@ function Product(props: IProductData) {
 
                 <div className={ClassNames(styles.infoContainer, styles.price)}>
                     <p className={styles.infoPrice}>{price}$</p>
-                    <Button callback={() => {}}>by now</Button>
-                    <Button callback={() => {}} isReverse>
+                    <Button callback={openModal}>by now</Button>
+                    <Button
+                        callback={() => {
+                            addProductToCart(id, price);
+                        }}
+                        isReverse
+                    >
                         add to cart
                     </Button>
                 </div>

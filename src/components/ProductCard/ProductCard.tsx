@@ -1,11 +1,33 @@
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CartContext } from '../../lib/CartContext/CartContext';
 import { ProductCardProps } from './types';
 import styles from './styles.module.scss';
 
 export default function ProductCard({ product, cardSize }: ProductCardProps) {
-    const { addProductToCart } = useContext(CartContext);
+    const { addProductToCart, deleteProductFromCart, cartData, openModal } =
+        useContext(CartContext);
+    const [inCart, setInCart] = useState(
+        Boolean(
+            Array.from(Object.keys(cartData)).filter(
+                (item) => Number(item) === product.id
+            ).length
+        )
+    );
+
+    const addProduct = () => {
+        addProductToCart(product.id, product.price);
+        setInCart(true);
+    };
+    const deleteProduct = () => {
+        deleteProductFromCart(product.id);
+        setInCart(false);
+    };
+    const buyProduct = () => {
+        addProductToCart(product.id, product.price);
+        setInCart(true);
+        openModal();
+    };
 
     return (
         <div
@@ -39,14 +61,18 @@ export default function ProductCard({ product, cardSize }: ProductCardProps) {
             <div className={styles.buttonCont}>
                 <button
                     className={`${styles.buttons}\n${styles.buttonAdd}`}
-                    onClick={() => {
-                        addProductToCart(product.id, product.price);
-                    }}
+                    onClick={inCart ? deleteProduct : addProduct}
                     type="button"
-                >{`Add €${product.price}`}</button>
-                <button className={styles.buttons} type="button">
-                    Buy now
+                >
+                    {inCart ? `Drop from cart` : `Add €${product.price}`}
                 </button>
+                <Link
+                    className={`${styles.buttons}\n${styles.buttonLink}`}
+                    to="/cart"
+                    onClick={buyProduct}
+                >
+                    Buy now
+                </Link>
             </div>
         </div>
     );

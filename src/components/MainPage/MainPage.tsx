@@ -18,7 +18,6 @@ export default function MainPage() {
     const [canSort, setCanSort] = useState<boolean>(true);
     const [queryFilters, setQueryFilters] = useSearchParams();
     const [linkOfFiltersState, setLinkOfFiltersState] = useState<LinkOfFilters>()
-
     const chooseBut = (curState:CardSizes, clickedBut:string) => {
         switch(clickedBut) {
             case 'small':
@@ -248,6 +247,7 @@ export default function MainPage() {
                                 }
                             }
                         />
+                        <span className={styles.UIBarProductsFound}>Found: {shownProducts.length}</span>
                         <SortInput callback={getSortMethod} defaultValue={sortMethod}/>
                         <div className={styles.UIBarButtonsContainer}>
                             <button 
