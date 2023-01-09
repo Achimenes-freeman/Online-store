@@ -5,22 +5,29 @@ import { ProductCardProps } from './types';
 import styles from './styles.module.scss';
 
 export default function ProductCard({ product, cardSize }: ProductCardProps) {
-    const { addProductToCart, deleteProductFromCart, cartData, openModal } = useContext(CartContext);
-    const [inCart, setInCart] = useState(Boolean(Array.from(Object.keys(cartData)).filter(item => Number(item) === product.id).length));
+    const { addProductToCart, deleteProductFromCart, cartData, openModal } =
+        useContext(CartContext);
+    const [inCart, setInCart] = useState(
+        Boolean(
+            Array.from(Object.keys(cartData)).filter(
+                (item) => Number(item) === product.id
+            ).length
+        )
+    );
 
     const addProduct = () => {
         addProductToCart(product.id, product.price);
         setInCart(true);
-    }
+    };
     const deleteProduct = () => {
         deleteProductFromCart(product.id);
-        setInCart(false)
-    }
+        setInCart(false);
+    };
     const buyProduct = () => {
         addProductToCart(product.id, product.price);
         setInCart(true);
-        openModal()
-    }
+        openModal();
+    };
 
     return (
         <div
@@ -52,16 +59,18 @@ export default function ProductCard({ product, cardSize }: ProductCardProps) {
                 </div>
             )}
             <div className={styles.buttonCont}>
-                <button className={`${styles.buttons}\n${styles.buttonAdd}`} 
-                    onClick={inCart ? deleteProduct : addProduct} 
+                <button
+                    className={`${styles.buttons}\n${styles.buttonAdd}`}
+                    onClick={inCart ? deleteProduct : addProduct}
                     type="button"
                 >
-                    {inCart
-                        ? `Drop from cart`
-                        : `Add €${product.price}`
-                    }
+                    {inCart ? `Drop from cart` : `Add €${product.price}`}
                 </button>
-                <Link className={`${styles.buttons}\n${styles.buttonLink}`} to='/cart' onClick={buyProduct}>
+                <Link
+                    className={`${styles.buttons}\n${styles.buttonLink}`}
+                    to="/cart"
+                    onClick={buyProduct}
+                >
                     Buy now
                 </Link>
             </div>

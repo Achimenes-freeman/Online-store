@@ -10,7 +10,7 @@ import { IProductData } from '../ProductPage/types';
 import styles from './style.module.scss';
 
 function Products({ totalPrice }: ICartProducts) {
-    const { cartData } = useContext(CartContext);
+    const { cartData, openModal } = useContext(CartContext);
     const [productsData, setProductsData] = useState<Array<IProductData>>([]);
     const [loading, setLoading] = useState(true);
 
@@ -93,7 +93,7 @@ function Products({ totalPrice }: ICartProducts) {
                         placeholder="enter promo code"
                         maxLength={10}
                     />
-                    <Button callback={() => {}}>by now</Button>
+                    <Button callback={openModal}>by now</Button>
                 </div>
             </div>
         </div>

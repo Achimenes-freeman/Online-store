@@ -21,7 +21,7 @@ export const CartContext = React.createContext<ICartContext>({
     changeProductAmount: () => {},
     clearProductFromCart: () => {},
     closeModal: () => {},
-    openModal: () => {}
+    openModal: () => {},
 });
 
 export function CartContextProvider({
@@ -33,11 +33,11 @@ export function CartContextProvider({
     const [modalState, setModalState] = useState(false);
 
     const closeModal = () => {
-        setModalState(false)
-    }
+        setModalState(false);
+    };
     const openModal = () => {
-        setModalState(true)
-    }
+        setModalState(true);
+    };
 
     useEffect(() => {
         setCartData(JSON.parse(localStorage.getItem('cart-data') || '{}'));
@@ -70,7 +70,7 @@ export function CartContextProvider({
     const clearProductFromCart = useCallback(() => {
         changeLocalStorage({});
         setCartData({});
-    }, [])
+    }, []);
 
     const changeProductAmount = useCallback(
         (productId: number, amount: number) => {
@@ -91,9 +91,16 @@ export function CartContextProvider({
             changeProductAmount,
             clearProductFromCart,
             closeModal,
-            openModal
+            openModal,
         }),
-        [cartData, modalState, addProductToCart, clearProductFromCart, deleteProductFromCart, changeProductAmount]
+        [
+            cartData,
+            modalState,
+            addProductToCart,
+            clearProductFromCart,
+            deleteProductFromCart,
+            changeProductAmount,
+        ]
     );
 
     return (
