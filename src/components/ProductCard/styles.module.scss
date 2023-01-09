@@ -23,6 +23,7 @@
     background: $white;
     text-align: center;
     font-family: $montserrat;
+    filter: drop-shadow(0 0 5px $gray-text);
 
     &Small {
         height: 300px;
@@ -41,7 +42,6 @@
     width: 100%;
     padding: 5px 15px;
     overflow: hidden;
-    filter: drop-shadow(0 8px 3px $gray-blue-bg);
 }
 
 .cardImg {
@@ -69,7 +69,6 @@
     font-weight: 600;
     text-align: start;
     text-decoration: none;
-    filter: drop-shadow(0 3px 3px $blue-bg);
 }
 
 .description {

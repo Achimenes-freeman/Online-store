@@ -16,7 +16,7 @@
     min-height: calc(100vh - 200px);
     width: 400px;
     border: 1px solid $blue-bg;
-    border-radius: 20px;
+    border-radius: 15px;
     background-color: $white;
     color: $black-text;
     font-size: 32px;
@@ -48,8 +48,7 @@
     align-items: center;
     justify-content: center;
     height: 50px;
-    width: 35%;
-    margin-bottom: 5px;
+    width: 65%;
     outline: none;
     border: none;
     border-radius: 15px;
@@ -71,8 +70,7 @@
     align-items: center;
     justify-content: center;
     height: 50px;
-    width: 35%;
-    margin-bottom: 5px;
+    width: 25%;
     outline: none;
     border: 1px solid $red-bg;
     border-radius: 15px;
@@ -93,5 +91,6 @@
     align-items: center;
     justify-content: space-around;
     width: 100%;
+    margin-bottom: 20px;
 }
 

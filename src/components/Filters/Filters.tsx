@@ -65,7 +65,7 @@ export default function Filters({defaultProducts, filteredProducts, getFilters, 
             />
             <div className={styles.buttonsCont} >
                 <button className={styles.resetBut} type='button' onClick={resetAllFilters}>Reset filters</button>
-                <button className={styles.copyBut} type='button' onClick={copyQueryLink}>Copy link</button>
+                <button className={styles.copyBut} type='button' onClick={copyQueryLink}>Copy</button>
             </div>
         </aside>
     )
