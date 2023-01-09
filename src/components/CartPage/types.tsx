@@ -1,10 +1,5 @@
-interface IProductCartData {
-    productId: number;
-    amount: number;
-}
+import { ICartData } from '../../lib/CartContext/types';
 
 export interface ICartProducts {
-    products: Array<IProductCartData>;
-    totalPrice: number;
-    changeTotalPrice: (num: number) => void;
+    products: ICartData;
 }

@@ -1,90 +1,75 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
-import { TCartProductsData } from './types';
+import { ICartData } from './types';
 
-interface ICartDataChildren {
-    children: React.ReactNode;
+interface ICartContext {
+    cartData: ICartData;
+    addProductToCart: (productId: number, price: number) => void;
+    deleteProductFromCart: (productId: number) => void;
+    changeProductAmount: (productId: number, amount: number) => void;
 }
 
-interface ContextValue {
-    cartProducts: TCartProductsData;
-    addCartProduct: (productsId: number, amount: number) => void;
-    removeCartProduct: (productId: number) => void;
-    changeProductAmount: (productId: number, currentAmount: number) => void;
-}
-
-// const cartProductsData: TCartProductsData = localStorage.getItem(
-//     'cart-products'
-// )
-//     ? JSON.parse(localStorage.getItem('cart-products') || '')
-//     : [];
-
-export const CartContext = React.createContext<ContextValue>({
-    cartProducts: [],
-    addCartProduct: () => {},
-    removeCartProduct: () => {},
+export const CartContext = React.createContext<ICartContext>({
+    cartData: {},
+    addProductToCart: () => {},
+    deleteProductFromCart: () => {},
     changeProductAmount: () => {},
 });
 
-export function CartContextProvider({ children }: ICartDataChildren) {
-    const [cartProducts, setCartProducts] = useState<TCartProductsData>([]);
+export function CartContextProvider({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    const [cartData, setCartData] = useState<ICartData>({});
+    // const [totalPrice, setTotalPrice] = useState<number>(0);
 
     useEffect(() => {
-        setCartProducts(
-            JSON.parse(localStorage.getItem('cart-products') || '[]')
-        );
+        setCartData(JSON.parse(localStorage.getItem('cart-data') || '{}'));
     }, []);
 
     // useEffect(() => {
-    //     localStorage.setItem('cart-products', JSON.stringify(cartProducts));
-    // }, [cartProducts]);
+    //     localStorage.setItem('cart-data', JSON.stringify(cartData));
+    // }, [cartData]);
 
-    const addCartProduct = useCallback(
-        (productId: number, amount: number) => {
-            setCartProducts([...cartProducts, { productId, amount }]);
+    const addProductToCart = useCallback(
+        (productId: number, price: number) => {
+            setCartData({ ...cartData, [productId]: { amount: 1, price } });
         },
-        [cartProducts]
+        [cartData]
     );
 
-    const removeCartProduct = useCallback(
+    const deleteProductFromCart = useCallback(
         (productId: number) => {
-            const productToRemove = cartProducts.findIndex(
-                (item) => item.productId === productId
-            );
-
-            setCartProducts([
-                ...cartProducts.slice(0, productToRemove),
-                ...cartProducts.slice(productToRemove + 1),
-            ]);
+            delete cartData[productId];
+            const obj = { ...cartData };
+            setCartData(obj);
         },
-        [cartProducts]
+        [cartData]
     );
 
     const changeProductAmount = useCallback(
-        (productId: number, currentAmount: number) => {
-            setCartProducts(
-                cartProducts.map((item) =>
-                    item.productId === productId
-                        ? { ...item, amount: currentAmount }
-                        : item
-                )
-            );
+        (productId: number, amount: number) => {
+            cartData[productId].amount = amount;
+            const obj = { ...cartData };
+
+            setCartData(obj);
         },
-        [cartProducts]
+        [cartData]
     );
 
-    const contextValue = useMemo(
+    const cartContextValue: ICartContext = useMemo(
         () => ({
-            cartProducts,
-            addCartProduct,
-            removeCartProduct,
+            cartData,
+            addProductToCart,
+            deleteProductFromCart,
             changeProductAmount,
         }),
-        [cartProducts, addCartProduct, removeCartProduct, changeProductAmount]
+        [cartData, addProductToCart, deleteProductFromCart, changeProductAmount]
     );
 
     return (
-        <CartContext.Provider value={contextValue}>
+        <CartContext.Provider value={cartContextValue}>
             {children}
         </CartContext.Provider>
     );

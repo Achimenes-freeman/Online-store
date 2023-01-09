@@ -1,15 +1,43 @@
 import classNames from 'classnames';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { CartProduct } from '../CartProduct/CartProduct';
 import { CartContext } from '../../lib/CartContext/CartContext';
-
 import Button from '../../generics/Button/Button';
 
 import { ICartProducts } from '../../lib/CartContext/types';
+import { IProductData } from '../ProductPage/types';
 
 import styles from './style.module.scss';
 
-function Products({ products, totalPrice, changeTotalPrice }: ICartProducts) {
+function Products({ totalPrice }: ICartProducts) {
+    const { cartData } = useContext(CartContext);
+    const [productsData, setProductsData] = useState<Array<IProductData>>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(true);
+        Promise.all(
+            Object.keys(cartData).map((item) =>
+                fetch(`https://dummyjson.com/products/${item}`)
+            )
+        )
+            .then((values) => Promise.all(values.map((item) => item.json())))
+            .then((values) => {
+                setProductsData(
+                    values.map((item) => ({
+                        ...item,
+                        amount: cartData[item.id].amount,
+                    }))
+                );
+                setLoading(false);
+            });
+    }, []);
+
+    const changeProductData = (productId: number) => {
+        const arr = productsData.filter((item) => item.id !== productId);
+        setProductsData(arr);
+    };
+
     return (
         <div className={styles.CartPage}>
             <div className={styles.products}>
@@ -22,14 +50,15 @@ function Products({ products, totalPrice, changeTotalPrice }: ICartProducts) {
                         <span className={styles.input}>page: 47</span>
                     </div>
                 </div>
-                {products?.map((item, index) => (
-                    <CartProduct
-                        productId={item.productId}
-                        index={index + 1}
-                        amountReceived={item.amount}
-                        changeTotalPrice={changeTotalPrice}
-                    />
-                ))}
+                {loading && <p className={styles.loading}>loading...</p>}
+                {!!productsData.length &&
+                    productsData.map((item, index) => (
+                        <CartProduct
+                            productData={item}
+                            index={index + 1}
+                            changeProductData={changeProductData}
+                        />
+                    ))}
             </div>
             <div className={classNames(styles.summary)}>
                 <h3 className={classNames(styles.Title, styles.sideTitle)}>
@@ -39,8 +68,8 @@ function Products({ products, totalPrice, changeTotalPrice }: ICartProducts) {
                     <p className={classNames(styles.amount, styles.summaryPar)}>
                         Products to by:{' '}
                         <span className={styles.blueText}>
-                            {products.reduce(
-                                (sum, item) => sum + item.amount,
+                            {Object.values(cartData).reduce(
+                                (sum, { amount }) => sum + amount,
                                 0
                             )}
                         </span>
@@ -68,25 +97,18 @@ function Products({ products, totalPrice, changeTotalPrice }: ICartProducts) {
 }
 
 export function CartPage() {
-    const { cartProducts } = useContext(CartContext);
+    const { cartData } = useContext(CartContext);
 
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalPrice] = useState(
+        Object.values(cartData).reduce(
+            (sum, { amount, price }) => sum + amount * price,
+            0
+        )
+    );
 
-    const changeTotalPrice = (num: number) => {
-        setTotalPrice((prev) => prev + num);
-    };
-
-    useEffect(() => {
-        setTotalPrice(0);
-    }, []);
-
-    return cartProducts.length ? (
-        <Products
-            products={cartProducts}
-            totalPrice={totalPrice}
-            changeTotalPrice={changeTotalPrice}
-        />
+    return Object.keys(cartData).length ? (
+        <Products totalPrice={totalPrice} />
     ) : (
-        <p>Empty cart</p>
+        <p>empty cart</p>
     );
 }

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../../lib/CartContext/CartContext';
-import { IProductData } from '../ProductPage/types';
+
 import { InfoIcons } from '../InfoIcons/InfoIcons';
 
 import { ICartProduct } from './types';
@@ -13,49 +13,42 @@ import PlusIcon from '../../assets/icons/plus-icon.svg';
 import MinusIcon from '../../assets/icons/minus-icon.svg';
 
 export function CartProduct({
-    productId,
+    productData,
     index,
-    amountReceived,
-    changeTotalPrice,
+    changeProductData,
 }: ICartProduct) {
-    const { removeCartProduct, changeProductAmount } = useContext(CartContext);
+    const { changeProductAmount, deleteProductFromCart, cartData } =
+        useContext(CartContext);
 
-    const [productData, setProductData] = useState<IProductData>();
-    const [amount, setAmount] = useState(amountReceived);
-    const [cost, setCost] = useState(
-        productData?.price && productData.price * amount
+    const [product] = useState(productData);
+    const [amount, setAmount] = useState(
+        product.amount ? product.amount : 12314
     );
+    const [cost, setCost] = useState(product.price * amount);
 
     useEffect(() => {
-        fetch(`https://dummyjson.com/products/${productId}`)
-            .then((res) => res.json())
-            .then((data) => setProductData(data));
-    }, [productId]);
-
-    useEffect(() => {
-        setCost(productData?.price && productData.price * amount);
-    }, [amount, productData]);
-
-    useEffect(() => {
-        if (productData) changeTotalPrice(productData.price);
-    }, [productData, changeTotalPrice]);
+        console.log('hi');
+        localStorage.setItem('cart-data', JSON.stringify(cartData));
+    }, [cartData]);
 
     const incProduct = () => {
-        if (productData && productData.stock > amount) {
-            const currentAmount = amount + 1;
-            setAmount(currentAmount);
-            changeProductAmount(productId, currentAmount);
-            changeTotalPrice(productData.price);
+        if (product.stock > amount) {
+            const newAmount = amount + 1;
+            setAmount(newAmount);
+            setCost(product.price * newAmount);
+            changeProductAmount(product.id, newAmount);
         }
     };
     const decProduct = () => {
-        if (productData && amount > 1) {
-            const currentAmount = amount - 1;
-            setAmount(currentAmount);
-            changeProductAmount(productId, currentAmount);
-            changeTotalPrice(productData.price * -1);
+        if (amount > 1) {
+            const newAmount = amount - 1;
+            setAmount(newAmount);
+            setCost(product.price * newAmount);
+            changeProductAmount(product.id, newAmount);
         } else {
-            removeCartProduct(productId);
+            changeProductData(product.id);
+            deleteProductFromCart(product.id);
+            localStorage.setItem('cart-data', JSON.stringify(cartData));
         }
     };
 
@@ -63,26 +56,24 @@ export function CartProduct({
         <div className={styles.CartProduct}>
             <div className={styles.order}>{index}</div>
             <div className={styles.info}>
-                <Link to={`/${productId}`} className={styles.picture}>
+                <Link to={`/${product.id}`} className={styles.picture}>
                     <img
                         className={styles.thumbnail}
-                        src={productData?.thumbnail}
+                        src={product.thumbnail}
                         alt=""
                     />
                 </Link>
 
-                <Link to={`/${productId}`} className={styles.content}>
+                <Link to={`/${product.id}`} className={styles.content}>
                     <div className={styles.title}>
-                        <h4 className={styles.name}>{productData?.title}</h4>
-                        <span>{productData?.brand}</span>
+                        <h4 className={styles.name}>{product.title}</h4>
+                        <span>{product.brand}</span>
                     </div>
-                    <p className={styles.description}>
-                        {productData?.description}
-                    </p>
+                    <p className={styles.description}>{product.description}</p>
                     <InfoIcons
-                        rating={productData?.rating}
-                        stock={productData?.stock}
-                        category={productData?.category}
+                        rating={product.rating}
+                        stock={product.stock}
+                        category={product.category}
                     />
                 </Link>
 
