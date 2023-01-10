@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Online-store/static/css/main.670335aa.css",
-    "main.js": "/Online-store/static/js/main.efebb795.js",
+    "main.js": "/Online-store/static/js/main.7adf24e5.js",
     "static/media/default-card.jpg": "/Online-store/static/media/default-card.7cc292e7fedf22340c26.jpg",
     "static/media/RSSLogo-icon.svg": "/Online-store/static/media/RSSLogo-icon.a88f6c12fc862dab3822f492f134b61a.svg",
     "static/media/mir-logo.svg": "/Online-store/static/media/mir-logo.2778a8d9cbb2485bf4dddef1fab3d555.svg",
@@ -18,10 +18,10 @@
     "static/media/minus-icon.svg": "/Online-store/static/media/minus-icon.b090233209a6458122dd3c61c54c1154.svg",
     "static/media/Category.svg": "/Online-store/static/media/Category.8469fae1fba163a43717fdca8a815c56.svg",
     "main.670335aa.css.map": "/Online-store/static/css/main.670335aa.css.map",
-    "main.efebb795.js.map": "/Online-store/static/js/main.efebb795.js.map"
+    "main.7adf24e5.js.map": "/Online-store/static/js/main.7adf24e5.js.map"
   },
   "entrypoints": [
     "static/css/main.670335aa.css",
-    "static/js/main.efebb795.js"
+    "static/js/main.7adf24e5.js"
   ]
 }
