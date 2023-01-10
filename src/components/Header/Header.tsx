@@ -25,7 +25,7 @@ export default function Header({logoCallback, cartCallback}: HeaderType) {
     return (
         <header className={styles.Header}>
             <div className={styles.container}>
-                <Link className={styles.link} to="/">
+                <Link className={styles.link} to="Online-store/">
                     <button
                         type="button"
                         className={styles.headerLogo}
@@ -40,7 +40,7 @@ export default function Header({logoCallback, cartCallback}: HeaderType) {
                     Total Count:{' '}
                     <span className={styles.cartTotalSpan}>€{totalPrice}</span>
                 </div>
-                <Link className={styles.link} to="/cart">
+                <Link className={styles.link} to="Online-store/cart">
                     <Cart
                         productsAmount={totalCount}
                         callback={cartCallback}

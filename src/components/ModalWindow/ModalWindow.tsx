@@ -192,7 +192,7 @@ export default function ModalWindow({
                 clearInterval(interval);
                 closeModal();
                 clearCart();
-                navigate('/');
+                navigate('Online-store/');
             }
         }
     }, [counter, timer, closeModal, clearCart, navigate]);
