@@ -10,9 +10,12 @@ function App() {
         <Routes>
             <Route path="Online-store/" element={<Layout />}>
                 <Route index element={<MainPage />} />
-                <Route path="/*" element={<NotFound />} />
-                <Route path="/:productId" element={<ProductPage />} />
-                <Route path="/cart" element={<CartPage />} />
+                <Route path="/Online-store/*" element={<NotFound />} />
+                <Route
+                    path="/Online-store/:productId"
+                    element={<ProductPage />}
+                />
+                <Route path="/Online-store/cart" element={<CartPage />} />
             </Route>
         </Routes>
     );
