@@ -74,7 +74,7 @@ export default function ProductCard({ product, cardSize }: ProductCardProps) {
                 </button>
                 <Link
                     className={`${styles.buttons}\n${styles.buttonLink}`}
-                    to="Online-store/cart"
+                    to="../Online-store/cart"
                     onClick={buyProduct}
                 >
                     Buy now
