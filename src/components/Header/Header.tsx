@@ -40,7 +40,7 @@ export default function Header({logoCallback, cartCallback}: HeaderType) {
                     Total Count:{' '}
                     <span className={styles.cartTotalSpan}>€{totalPrice}</span>
                 </div>
-                <Link className={styles.link} to="/cart">
+                <Link className={styles.link} to="Online-store/cart">
                     <Cart
                         productsAmount={totalCount}
                         callback={cartCallback}

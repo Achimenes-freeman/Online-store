@@ -26,10 +26,6 @@ export function CartProduct({
     );
     const [cost, setCost] = useState(product.price * amount);
 
-    // useEffect(() => {
-    //     localStorage.setItem('cart-data', JSON.stringify(cartData));
-    // }, [cartData]);
-
     const incProduct = () => {
         if (product.stock > amount) {
             const newAmount = amount + 1;
@@ -55,7 +51,7 @@ export function CartProduct({
         <div className={styles.CartProduct}>
             <div className={styles.order}>{index}</div>
             <div className={styles.info}>
-                <Link to={`/${product.id}`} className={styles.picture}>
+                <Link to={`Online-store/${product.id}`} className={styles.picture}>
                     <img
                         className={styles.thumbnail}
                         src={product.thumbnail}
@@ -63,7 +59,7 @@ export function CartProduct({
                     />
                 </Link>
 
-                <Link to={`/${product.id}`} className={styles.content}>
+                <Link to={`Online-store/${product.id}`} className={styles.content}>
                     <div className={styles.title}>
                         <h4 className={styles.name}>{product.title}</h4>
                         <span>{product.brand}</span>
