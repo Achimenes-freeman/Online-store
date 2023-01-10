@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/Online-store/static/css/main.670335aa.css",
-    "main.js": "/Online-store/static/js/main.7adf24e5.js",
-    "static/media/default-card.jpg": "/Online-store/static/media/default-card.7cc292e7fedf22340c26.jpg",
-    "static/media/RSSLogo-icon.svg": "/Online-store/static/media/RSSLogo-icon.a88f6c12fc862dab3822f492f134b61a.svg",
-    "static/media/mir-logo.svg": "/Online-store/static/media/mir-logo.2778a8d9cbb2485bf4dddef1fab3d555.svg",
-    "static/media/small-products-icon.svg": "/Online-store/static/media/small-products-icon.2bf2ca48721be94f8b0d20c8cd68a08b.svg",
-    "static/media/cart-icon.svg": "/Online-store/static/media/cart-icon.077e7149056ab37a5d132e2adbc2d968.svg",
-    "static/media/github-logo-icon.svg": "/Online-store/static/media/github-logo-icon.f65608213b327c1fa153aa53add626a6.svg",
-    "static/media/big-products-icon.svg": "/Online-store/static/media/big-products-icon.1da3b4b2c14f75a8cd3115fcb381e344.svg",
-    "static/media/visa-card.svg": "/Online-store/static/media/visa-card.7c451fc9bef2a67d5665bc0ca4241a27.svg",
-    "static/media/mastercard-card.svg": "/Online-store/static/media/mastercard-card.92c5b76a9ebc565de87902533102fc82.svg",
-    "static/media/Stock.svg": "/Online-store/static/media/Stock.9fb4466987ed6080e4e9512ec9533e74.svg",
-    "index.html": "/Online-store/index.html",
-    "static/media/plus-icon.svg": "/Online-store/static/media/plus-icon.43801880406e1dd6d58a3c532356bb3d.svg",
-    "static/media/Rating.svg": "/Online-store/static/media/Rating.32ca46b714f0972f7aff3023637006f5.svg",
-    "static/media/minus-icon.svg": "/Online-store/static/media/minus-icon.b090233209a6458122dd3c61c54c1154.svg",
-    "static/media/Category.svg": "/Online-store/static/media/Category.8469fae1fba163a43717fdca8a815c56.svg",
-    "main.670335aa.css.map": "/Online-store/static/css/main.670335aa.css.map",
-    "main.7adf24e5.js.map": "/Online-store/static/js/main.7adf24e5.js.map"
+    "main.css": "/static/css/main.670335aa.css",
+    "main.js": "/static/js/main.e498d400.js",
+    "static/media/default-card.jpg": "/static/media/default-card.7cc292e7fedf22340c26.jpg",
+    "static/media/RSSLogo-icon.svg": "/static/media/RSSLogo-icon.a88f6c12fc862dab3822f492f134b61a.svg",
+    "static/media/mir-logo.svg": "/static/media/mir-logo.2778a8d9cbb2485bf4dddef1fab3d555.svg",
+    "static/media/small-products-icon.svg": "/static/media/small-products-icon.2bf2ca48721be94f8b0d20c8cd68a08b.svg",
+    "static/media/cart-icon.svg": "/static/media/cart-icon.077e7149056ab37a5d132e2adbc2d968.svg",
+    "static/media/github-logo-icon.svg": "/static/media/github-logo-icon.f65608213b327c1fa153aa53add626a6.svg",
+    "static/media/big-products-icon.svg": "/static/media/big-products-icon.1da3b4b2c14f75a8cd3115fcb381e344.svg",
+    "static/media/visa-card.svg": "/static/media/visa-card.7c451fc9bef2a67d5665bc0ca4241a27.svg",
+    "static/media/mastercard-card.svg": "/static/media/mastercard-card.92c5b76a9ebc565de87902533102fc82.svg",
+    "static/media/Stock.svg": "/static/media/Stock.9fb4466987ed6080e4e9512ec9533e74.svg",
+    "index.html": "/index.html",
+    "static/media/plus-icon.svg": "/static/media/plus-icon.43801880406e1dd6d58a3c532356bb3d.svg",
+    "static/media/Rating.svg": "/static/media/Rating.32ca46b714f0972f7aff3023637006f5.svg",
+    "static/media/minus-icon.svg": "/static/media/minus-icon.b090233209a6458122dd3c61c54c1154.svg",
+    "static/media/Category.svg": "/static/media/Category.8469fae1fba163a43717fdca8a815c56.svg",
+    "main.670335aa.css.map": "/static/css/main.670335aa.css.map",
+    "main.e498d400.js.map": "/static/js/main.e498d400.js.map"
   },
   "entrypoints": [
     "static/css/main.670335aa.css",
-    "static/js/main.7adf24e5.js"
+    "static/js/main.e498d400.js"
   ]
 }
