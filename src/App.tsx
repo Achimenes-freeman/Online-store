@@ -8,9 +8,9 @@ import { NotFound } from './components/NotFound/NotFound';
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="Online-store/" element={<Layout />}>
                 <Route index element={<MainPage />} />
-                <Route path="*" element={<NotFound />} />
+                <Route path="/*" element={<NotFound />} />
                 <Route path="/:productId" element={<ProductPage />} />
                 <Route path="/cart" element={<CartPage />} />
             </Route>
