@@ -12,7 +12,7 @@ function ProductPage() {
     const navigate = useNavigate();
 
     if (Number(productId) > 100 || Number.isNaN(Number(productId))) {
-        navigate('/notfound/404');
+        navigate('/Online-store/notfound/404');
     }
     const [product, setProduct] = useState<IProductData>();
 

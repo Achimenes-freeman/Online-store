@@ -8,11 +8,14 @@ import { NotFound } from './components/NotFound/NotFound';
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
-                <Route path='Online-store/' element={<MainPage />} />
-                <Route path="Online-store/*" element={<NotFound />} />
-                <Route path="Online-store/:productId" element={<ProductPage />} />
-                <Route path="Online-store/cart" element={<CartPage />} />
+            <Route path="Online-store/" element={<Layout />}>
+                <Route index element={<MainPage />} />
+                <Route path="/Online-store/*" element={<NotFound />} />
+                <Route
+                    path="/Online-store/:productId"
+                    element={<ProductPage />}
+                />
+                <Route path="/Online-store/cart" element={<CartPage />} />
             </Route>
         </Routes>
     );

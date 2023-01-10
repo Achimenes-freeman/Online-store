@@ -35,7 +35,10 @@ export default function ProductCard({ product, cardSize }: ProductCardProps) {
                 cardSize.smallCards ? styles.CardContSmall : styles.CardContBig
             }`}
         >
-            <Link className={styles.cardImgCont} to={`Online-store/${product.id}`}>
+            <Link
+                className={styles.cardImgCont}
+                to={`/Online-store/${product.id}`}
+            >
                 <img
                     className={styles.cardImg}
                     src={product.thumbnail}
@@ -43,7 +46,10 @@ export default function ProductCard({ product, cardSize }: ProductCardProps) {
                 />
             </Link>
             <div className={styles.textCont}>
-                <Link className={styles.title} to={`Online-store/${product.id}`}>
+                <Link
+                    className={styles.title}
+                    to={`/Online-store/${product.id}`}
+                >
                     {product.title}
                 </Link>
                 <p className={styles.description}>{product.category}</p>
