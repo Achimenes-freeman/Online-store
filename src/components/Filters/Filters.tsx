@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CheckboxFilter from '../CheckboxFilter/CheckboxFilter';
 import RangeFilter from '../RangeFilter/RangeFilter';
 import styles from './styles.module.scss';
@@ -7,6 +7,7 @@ import { FilterNames, FilterTypes, FiltersProps, IFilters } from './types';
 
 export default function Filters({defaultProducts, filteredProducts, getFilters, resetFilters, filters}:FiltersProps) {
     const [resetState, setResetState] = useState(false)
+    const [copyState, setCopyState] = useState(false);
     const updateFilters = (filterName: FilterNames, filterValue: FilterTypes) => {
         const newUpdateFilters:IFilters = {};
         newUpdateFilters[filterName] = filterValue
@@ -21,7 +22,13 @@ export default function Filters({defaultProducts, filteredProducts, getFilters, 
     }
     const copyQueryLink = () => {
         navigator.clipboard.writeText(window.location.href)
+        setCopyState(true)
     }
+    useEffect(() => {
+        if(copyState) {
+            setTimeout(() => setCopyState(false), 2000)
+        }
+    }, [copyState])
     
     return (
         <aside className={styles.FiltersContainer}>
@@ -65,7 +72,7 @@ export default function Filters({defaultProducts, filteredProducts, getFilters, 
             />
             <div className={styles.buttonsCont} >
                 <button className={styles.resetBut} type='button' onClick={resetAllFilters}>Reset filters</button>
-                <button className={styles.copyBut} type='button' onClick={copyQueryLink}>Copy</button>
+                <button className={`${styles.copyBut}\n${!!copyState && styles.copyButCopied}`} type='button' onClick={copyState ? () => {} : copyQueryLink}>{copyState ? `Copied!` : `Copy link`}</button>
             </div>
         </aside>
     )

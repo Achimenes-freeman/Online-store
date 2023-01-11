@@ -107,8 +107,8 @@ export function CartProduct({
 
                     <p className={styles.cost}>
                         <span className={styles.costText}>Cost: </span>
-                        {cost}
                         <span className={styles.euro}>€</span>
+                        {cost}
                     </p>
                 </div>
             </div>

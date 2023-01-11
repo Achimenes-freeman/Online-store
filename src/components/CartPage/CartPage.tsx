@@ -85,7 +85,7 @@ function Products({ totalPrice }: ICartProducts) {
                         )}
                     >
                         Total price:{' '}
-                        <span className={styles.blueText}>{totalPrice}</span>
+                        <span className={styles.redText}>€{totalPrice}</span>
                     </p>
                     <input
                         className={styles.inputPromo}

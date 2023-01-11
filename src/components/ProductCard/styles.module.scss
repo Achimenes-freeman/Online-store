@@ -98,10 +98,10 @@
     justify-content: center;
     height: 50px;
     width: 85px;
-    border: 1px solid $red-bg;
+    border: 1px solid $blue-bg;
     border-radius: 5px;
     background-color: $white;
-    color: $red-bg;
+    color: $blue-bg;
     cursor: pointer;
     font-family: $montserrat;
     font-size: 16px;
@@ -110,6 +110,7 @@
 
     &:hover {
         background-color: $red-bg;
+        border-color: $red-bg;
         color: $white;
         transform: scale(1.02);
     }
@@ -129,6 +130,16 @@
     &:hover {
         background-color: $hoverChecked;
         border-color: $hoverChecked;
+    }
+}
+
+.buttonInCart {
+    background-color: $red-bg;
+    border-color:  $red-bg;
+
+    &:hover {
+        background-color: #b91616;
+        border-color: #b91616;
     }
 }
 

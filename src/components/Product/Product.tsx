@@ -1,5 +1,6 @@
 import ClassNames from 'classnames';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CartContext } from '../../lib/CartContext/CartContext';
 import ProductImages from '../ProductImages/ProductImages';
 import { InfoIcons } from '../InfoIcons/InfoIcons';
@@ -9,7 +10,7 @@ import { IProductData } from '../ProductPage/types';
 import styles from './style.module.scss';
 
 function Product(props: IProductData) {
-    const { addProductToCart, openModal } = useContext(CartContext);
+    const { addProductToCart, deleteProductFromCart, cartData, openModal } = useContext(CartContext);
 
     const {
         id,
@@ -24,8 +25,33 @@ function Product(props: IProductData) {
         images,
     } = { ...props };
 
+    const [inCart, setInCart] = useState(
+        Boolean(
+            Array.from(Object.keys(cartData)).filter(
+                (item) => Number(item) === id
+            ).length
+        )
+    );
+
+    const addProduct = () => {
+        addProductToCart(id, price);
+        setInCart(true);
+    };
+    const deleteProduct = () => {
+        deleteProductFromCart(id);
+        setInCart(false);
+    };
+    const buyProduct = () => {
+        addProductToCart(id, price);
+        setInCart(true);
+        openModal();
+    };
+
     return (
         <div className={styles.Product}>
+            <div className={styles.productPath}>
+                <Link className={styles.productPathLink} to="/Online-store/">Store</Link> {` >> ${category} >> ${brand} >> ${title}`}
+            </div>
             <div className={styles.presentation}>
                 <ProductImages thumbnail={thumbnail} images={images} />
             </div>
@@ -51,15 +77,15 @@ function Product(props: IProductData) {
                 </div>
 
                 <div className={ClassNames(styles.infoContainer, styles.price)}>
-                    <p className={styles.infoPrice}>{price}$</p>
-                    <Button callback={openModal}>by now</Button>
+                    <p className={styles.infoPrice}>€{price}</p>
+                    <Link to="/Online-store/cart">
+                        <Button callback={buyProduct}>by now</Button>
+                    </Link>
                     <Button
-                        callback={() => {
-                            addProductToCart(id, price);
-                        }}
+                        callback={inCart ?  deleteProduct: addProduct}
                         isReverse
                     >
-                        add to cart
+                        {inCart ? `drop from cart` : `add to cart`}
                     </Button>
                 </div>
             </div>

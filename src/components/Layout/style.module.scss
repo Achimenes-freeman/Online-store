@@ -13,3 +13,8 @@
     align-items: center;
     background: $gray-blue-bg
 }
+
+.overflowHidden {
+    height: 100vh;
+    overflow: hidden;
+}

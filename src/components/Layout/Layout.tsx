@@ -11,7 +11,7 @@ export function Layout() {
     const {closeModal, modalState, clearProductFromCart} = useContext(CartContext)
 
     return (
-        <div className={styles.Layout}>
+        <div className={`${styles.Layout}\n${!!modalState && styles.overflowHidden}`}>
             <Header />
 
             <main className={styles.main}>

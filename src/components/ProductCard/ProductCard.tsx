@@ -66,7 +66,7 @@ export default function ProductCard({ product, cardSize }: ProductCardProps) {
             )}
             <div className={styles.buttonCont}>
                 <button
-                    className={`${styles.buttons}\n${styles.buttonAdd}`}
+                    className={`${styles.buttons}\n${styles.buttonAdd}\n${!!inCart && styles.buttonInCart}`}
                     onClick={inCart ? deleteProduct : addProduct}
                     type="button"
                 >
