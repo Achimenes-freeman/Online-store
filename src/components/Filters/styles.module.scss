@@ -84,6 +84,16 @@
     &:hover {
         transform: scale(1.05);
     }
+
+    &Copied {
+        background: $red-bg;
+        color: $white;
+        cursor: default;
+
+        &:hover {
+            transform: none;
+        }
+    }
 }
 
 .buttonsCont {
