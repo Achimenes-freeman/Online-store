@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import Cart from '../../generics/Cart/Cart';
 import formatTotalCount from './helpers';
 import styles from './styles.module.scss';
-import { HeaderType } from './types';
 import { CartContext } from '../../lib/CartContext/CartContext';
 
-export default function Header({ logoCallback, cartCallback }: HeaderType) {
+export default function Header() {
     const { cartData } = useContext(CartContext);
     const [totalPrice, setTotalPrice] = useState<string>(
         formatTotalCount(
@@ -38,7 +37,6 @@ export default function Header({ logoCallback, cartCallback }: HeaderType) {
                     <button
                         type="button"
                         className={styles.headerLogo}
-                        onClick={logoCallback}
                     >
                         <span className={styles.headerLogoSpan1}>Online</span>
                         <span className={styles.headerLogoSpan2}>Store</span>
@@ -50,7 +48,7 @@ export default function Header({ logoCallback, cartCallback }: HeaderType) {
                     <span className={styles.cartTotalSpan}>€{totalPrice}</span>
                 </div>
                 <Link className={styles.link} to="/Online-store/cart">
-                    <Cart productsAmount={totalCount} callback={cartCallback} />
+                    <Cart productsAmount={totalCount} />
                 </Link>
             </div>
         </header>

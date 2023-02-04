@@ -6,5 +6,5 @@ export default function formatTotalCount(totalPrice:number):string {
         return `${Math.round(totalPrice / 100) / 10}K`
     }
 
-    return `${totalPrice}`
+    return String(totalPrice)
 }

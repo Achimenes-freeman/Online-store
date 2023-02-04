@@ -3,7 +3,8 @@ import { GenericRangeInputFilter } from "./types";
 import styles from "./styles.module.scss";
 
 export default function RangeInputFilter({min, max, title,  changeFilters, minValue, maxValue}: GenericRangeInputFilter) {
-    const gap = Math.floor(max / 18);
+    const GAP_PROPORTION = 18;
+    const gap = Math.floor(max / GAP_PROPORTION);
     const [canFind, setCanFind] = useState<boolean>(true);
     const [minValueState, setMinValueState] = useState(minValue);
     const [maxValueState, setMaxValueState] = useState(maxValue);
