@@ -32,7 +32,7 @@ export default function ProductCard({ product, cardSize }: ProductCardProps) {
     return (
         <div
             className={`${styles.CardCont}\n${
-                cardSize.smallCards ? styles.CardContSmall : styles.CardContBig
+                (cardSize === 'small') ? styles.CardContSmall : styles.CardContBig
             }`}
         >
             <Link
@@ -54,7 +54,7 @@ export default function ProductCard({ product, cardSize }: ProductCardProps) {
                 </Link>
                 <p className={styles.description}>{product.category}</p>
             </div>
-            {cardSize.bigCards && (
+            {(cardSize === 'big') && (
                 <div className={styles.infoCont}>
                     <p className={styles.infoRate}>
                         Rating: <span>★{product.rating}</span>

@@ -19,10 +19,12 @@ export interface FiltersType {
     'Price'?: number[];
 }
 
-export interface CardSizes {
-    bigCards: boolean;
-    smallCards: boolean;
-}
+// export interface CardSizes {
+//     bigCards: boolean;
+//     smallCards: boolean;
+// }
+
+export type CardSizes = 'big' | 'small'
 
 export interface LinkOfFilters {
     linkFilters:FiltersType | null;
@@ -30,3 +32,5 @@ export interface LinkOfFilters {
     linkSort: string | null;
     linkCardSize: string | null;
 }
+
+export type SortMethodType = 'high-rate' | 'low-rate' | 'high-price' | 'low-price'
