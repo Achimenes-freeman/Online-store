@@ -1,8 +1,8 @@
-import {useState, useEffect, useCallback, useReducer} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SortInput from '../../generics/SortInput/SortInput';
 import styles from './styles.module.scss';
-import { CardSizes, FiltersType, LinkOfFilters, Product } from './types';
+import { CardSizes, FiltersType, LinkOfFilters, Product, SortMethodType } from './types';
 import Filters from '../Filters/Filters'
 import SPLink from '../../assets/icons/small-products-icon.svg';
 import BPLink from '../../assets/icons/big-products-icon.svg';
@@ -14,34 +14,49 @@ export default function MainPage() {
 
     const [filters, setFilters] = useState<FiltersType>();
     const [searchFilter, setSearchFilter] = useState<string>('');
-    const [sortMethod, setSortMethod] = useState<string>('high-rate');
+    const [sortMethod, setSortMethod] = useState<SortMethodType>('high-rate');
     const [canSort, setCanSort] = useState<boolean>(true);
     const [queryFilters, setQueryFilters] = useSearchParams();
     const [linkOfFiltersState, setLinkOfFiltersState] = useState<LinkOfFilters>()
-    const chooseBut = (curState:CardSizes, clickedBut:string) => {
-        switch(clickedBut) {
-            case 'small':
-                return {
-                    ...curState,
-                    bigCards: false,
-                    smallCards: true,
-                }
-            case 'big': 
-                return {
-                    ...curState,
-                    bigCards: true,
-                    smallCards: false,
-                }
+    const [curCardState, setCurState] = useState<CardSizes>('small')
+
+    const setSortMethodFunc = (method: string) => {
+        let res: SortMethodType = 'high-rate';
+        switch(method) {
+            case 'high-rate':
+                setSortMethod('high-rate');
+                res = 'high-rate';
+                break;
+            case 'low-rate':
+                setSortMethod('low-rate')
+                res = 'low-rate';
+                break;
+            case 'high-price':
+                setSortMethod('high-price');
+                res = 'high-price';
+                break;
+            case 'low-price':
+                setSortMethod('low-price');
+                res = 'low-price';
+                break;
             default: 
-                return curState;
+                break;
+        }
+        return res
+    }
+    const setCurStateFunc = (size: string) => {
+        switch(size) {
+            case 'small':
+                setCurState('small')
+                break
+            case 'big':
+                setCurState('big')
+                break
+            default:
+                break
         }
     }
-    const [curCardState, dispatchCurState] = useReducer(chooseBut, {
-        bigCards: false,
-        smallCards: true,
-    })
-
-    const sortProducts = ( method: string = sortMethod, ableToSort: boolean = canSort) => {
+    const sortProducts = ( method: SortMethodType = sortMethod, ableToSort: boolean = canSort) => {
         if(ableToSort) {
             const res = [...shownProducts];
             switch(method) {
@@ -65,9 +80,8 @@ export default function MainPage() {
         }
     }
     const getSortMethod = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setSortMethod(event.target.value);
-        sortProducts(event.target.value, true)
-        setQueryFilters({...Object.fromEntries(queryFilters.entries()), 'sort': event.target.value})
+        sortProducts(setSortMethodFunc(event.target.value), true)
+        setQueryFilters({...Object.fromEntries(queryFilters.entries()), sort: event.target.value})
     }
     const getFilters = (newFilters:FiltersType) => {
         const filterType: string = Object.keys(newFilters)[0]
@@ -210,8 +224,8 @@ export default function MainPage() {
         if(linkOfFiltersState) {
             if(linkOfFiltersState.linkFilters) setFilters(linkOfFiltersState.linkFilters);
             if(linkOfFiltersState.linkSearch) setSearchFilter(linkOfFiltersState.linkSearch)
-            if(linkOfFiltersState.linkSort) setSortMethod(linkOfFiltersState.linkSort);
-            if(linkOfFiltersState.linkCardSize) dispatchCurState(linkOfFiltersState.linkCardSize)
+            if(linkOfFiltersState.linkSort) setSortMethodFunc(linkOfFiltersState.linkSort);
+            if(linkOfFiltersState.linkCardSize) setCurStateFunc(linkOfFiltersState.linkCardSize)
             setCanSort(true)
             setLinkOfFiltersState(undefined)
         }
@@ -242,7 +256,7 @@ export default function MainPage() {
                                         queryFilters.delete('search')
                                         setQueryFilters(queryFilters)
                                     } else {
-                                        setQueryFilters({...Object.fromEntries(queryFilters.entries()) , 'search': event.target.value})
+                                        setQueryFilters({...Object.fromEntries(queryFilters.entries()) , search: event.target.value})
                                     }
                                 }
                             }
@@ -251,21 +265,21 @@ export default function MainPage() {
                         <SortInput callback={getSortMethod} defaultValue={sortMethod}/>
                         <div className={styles.UIBarButtonsContainer}>
                             <button 
-                                className={`${styles.UIBarButton}\n${curCardState.smallCards ? styles.UIBarButtonInactive: ''}`} 
+                                className={`${styles.UIBarButton}\n${curCardState === 'small' ? styles.UIBarButtonInactive: ''}`} 
                                 type='button' 
                                 onClick={() => {
-                                    dispatchCurState('big')
-                                    setQueryFilters({...Object.fromEntries(queryFilters.entries()), 'size': 'big'})
+                                    setCurState('big')
+                                    setQueryFilters({...Object.fromEntries(queryFilters.entries()), size: 'big'})
                                 }}
                             >
                                 <img className={styles.UIBarButtonImg} src={BPLink} alt="BP" />
                             </button>
                             <button 
-                                className={`${styles.UIBarButton}\n${curCardState.bigCards ? styles.UIBarButtonInactive : ''}`} 
+                                className={`${styles.UIBarButton}\n${curCardState === 'big' ? styles.UIBarButtonInactive : ''}`} 
                                 type='button' 
                                 onClick={() => {
-                                    dispatchCurState('small')
-                                    setQueryFilters({...Object.fromEntries(queryFilters.entries()), 'size': 'small'})
+                                    setCurState('small')
+                                    setQueryFilters({...Object.fromEntries(queryFilters.entries()), size: 'small'})
                                 }}
                             >
                                 <img className={styles.UIBarButtonImg} src={SPLink} alt="SP" />

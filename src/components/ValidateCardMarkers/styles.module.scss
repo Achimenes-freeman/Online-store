@@ -1,0 +1,19 @@
+@import '../../variables.scss';
+
+.cardInput {
+    &ErrorSpan {
+        cursor: default;
+        color: $red-bg;
+        font-size: 14px;
+    }
+    &ErrorCont {
+        position: absolute;
+        top: 84%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+}

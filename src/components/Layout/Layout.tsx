@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useContext } from 'react';
+import cn from 'classnames'
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
@@ -11,7 +12,7 @@ export function Layout() {
     const {closeModal, modalState, clearProductFromCart} = useContext(CartContext)
 
     return (
-        <div className={`${styles.Layout}\n${!!modalState && styles.overflowHidden}`}>
+        <div className={cn(styles.Layout, {[styles.overflowHidden]: !!modalState})}>
             <Header />
 
             <main className={styles.main}>
