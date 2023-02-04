@@ -1,17 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 
-import { ICartData } from './types';
-
-interface ICartContext {
-    cartData: ICartData;
-    modalState: boolean;
-    addProductToCart: (productId: number, price: number) => void;
-    deleteProductFromCart: (productId: number) => void;
-    clearProductFromCart: () => void;
-    changeProductAmount: (productId: number, amount: number) => void;
-    closeModal: () => void;
-    openModal: () => void;
-}
+import { ICartContext, ICartData } from './types';
 
 export const CartContext = React.createContext<ICartContext>({
     cartData: {},
