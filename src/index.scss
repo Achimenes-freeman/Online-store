@@ -23,7 +23,18 @@ html {
 
 body {
     margin: 0;
+    scrollbar-gutter: stable both-edges;
+    overflow-y: auto;
     font-family: $ubuntu;
+
+    &::-webkit-scrollbar {
+        appearance: none;
+        width: 15px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--main);
+    }
 }
 
 #root {

@@ -103,3 +103,13 @@
     width: 100%;
     font-size: 3rem;
 }
+
+
+.emptyCart {
+    padding-bottom: 2px;
+    border-bottom: 2px solid var(--main);
+    color: var(--subAlt);
+    font-size: 32px;
+    font-weight: 300;
+    text-transform: capitalize;
+}

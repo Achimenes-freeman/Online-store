@@ -122,6 +122,6 @@ export function CartPage() {
     return Object.keys(cartData).length ? (
         <Products totalPrice={totalPrice} />
     ) : (
-        <p>empty cart</p>
+        <p className={styles.emptyCart}>empty cart</p>
     );
 }
