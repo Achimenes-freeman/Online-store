@@ -15,10 +15,9 @@
     gap: 25px;
     min-height: calc(100vh - 200px);
     width: 400px;
-    border: 1px solid $blue-bg;
     border-radius: 15px;
-    background-color: $white;
-    color: $black-text;
+    background-color: var(--text);
+    color: var(--subAlt);
     font-size: 32px;
     font-weight: 600;
 }
@@ -36,10 +35,9 @@
 .rangeHeading {
     margin: 0;
     padding: 0;
-    color: $red-bg;
+    color: var(--main);
     font-size: 36px;
     font-weight: 600;
-    filter: drop-shadow(0px 10px 3px $gray-blue-bg);
 }
 
 .resetBut {
@@ -47,20 +45,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    height: 55px;
     width: 65%;
     outline: none;
     border: none;
-    border-radius: 15px;
-    background: $blue-bg;
-    color: $white;
+    border-radius: 10px;
+    background: var(--main);
+    color: var(--text);
     cursor: pointer;
     font-family: $montserrat;
     font-size: 24px;
     transition: 0.2s ease-in-out;
 
     &:hover {
-        transform: scale(1.05);
+        background: var(--subAlt)
+    }
+
+    &:active {
+        background: var(--text);
+        color: var(--main);
     }
 }
 
@@ -69,29 +72,45 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
+    height: 55px;
     width: 25%;
     outline: none;
-    border: 1px solid $red-bg;
-    border-radius: 15px;
-    background: $white;
-    color: $black-text;
+    border: 1px solid var(--subAlt);
+    border-radius: 10px;
+    background: none;
+    color: var(--subAlt);
     cursor: pointer;
     font-family: $montserrat;
     font-size: 20px;
     transition: 0.2s ease-in-out;
 
     &:hover {
-        transform: scale(1.05);
+        border-color: var(--subAlt);
+        background: var(--subAlt);
+        color: var(--text);
+    }
+
+    &:active {
+        background: var(--text);
+        border-color: transparent;
+        color: var(--main);
     }
 
     &Copied {
-        background: $red-bg;
-        color: $white;
+        background:  var(--subAlt);
+        color: var(--text);
         cursor: default;
 
         &:hover {
-            transform: none;
+            border: 1px solid var(--subAlt);
+            background:  var(--subAlt);
+            color: var(--text);
+        }
+
+        &:active {
+            border: 1px solid var(--subAlt);
+            background:  var(--subAlt);
+            color: var(--text);
         }
     }
 }

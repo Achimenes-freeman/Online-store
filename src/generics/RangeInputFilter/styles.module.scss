@@ -47,8 +47,8 @@
 
     &::-webkit-slider-thumb {
         appearance: none;
-        background-color: $white;
-        border: 2px solid $blue-bg;
+        background-color: var(--text);
+        border: 2px solid var(--main);
         border-radius: 50%;
         cursor: pointer;
         height: 20px;
@@ -58,11 +58,13 @@
         width: 20px;
 
         &:hover {
-            background-color: $gray-blue-bg;
+            background-color: var(--subAlt);
+            border-color: var(--subAlt);
         }
 
         &:active {
-            background-color: $blue-bg;
+            background-color: var(--main);
+            border-color: var(--main);
         }
     }
 }

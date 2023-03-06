@@ -20,10 +20,9 @@
     height: 300px;
     width: 100%;
     border-radius: 5px;
-    background: $white;
+    background: var(--text);
     text-align: center;
     font-family: $montserrat;
-    filter: drop-shadow(0 0 5px $gray-text);
 
     &Small {
         height: 300px;
@@ -64,7 +63,7 @@
 .title {
     padding: 0 15px 0 15px;
     margin: 0;
-    color: $black-text;
+    color: var(--textAlt);
     font-size: 18px;
     font-weight: 600;
     text-align: start;
@@ -75,7 +74,7 @@
     width: 100%;
     padding: 0 15px 0 15px;
     margin: 0;
-    color: $red-light;
+    color: var(--sub);
     font-size: 14px;
     font-weight: 600;
     text-align: left;
@@ -98,10 +97,10 @@
     justify-content: center;
     height: 50px;
     width: 85px;
-    border: 1px solid $blue-bg;
+    border: 1px solid var(--main);
     border-radius: 5px;
     background-color: $white;
-    color: $blue-bg;
+    color: var(--textAlt);
     cursor: pointer;
     font-family: $montserrat;
     font-size: 16px;
@@ -109,38 +108,29 @@
     transition: all 0.15s ease-in-out;
 
     &:hover {
-        background-color: $red-bg;
-        border-color: $red-bg;
-        color: $white;
-        transform: scale(1.02);
+        border-color: var(--subAlt);
+        background: var(--subAlt);
+        color: var(--text);
     }
-    
 
     &:active {
-        transform: scale(0.95);
+        background: var(--background);
+        border-color: var(--background);
+        color: var(--main);
     }
 }
 
 .buttonAdd {
     flex-grow: 1;
-    border: 1px solid $blue-bg;
-    background-color: $blue-bg;
-    color: $white;
-
-    &:hover {
-        background-color: $hoverChecked;
-        border-color: $hoverChecked;
-    }
+    border: 1px solid var(--main);
+    background-color: var(--main);
+    color: var(--text);
 }
 
 .buttonInCart {
-    background-color: $red-bg;
-    border-color:  $red-bg;
-
-    &:hover {
-        background-color: #b91616;
-        border-color: #b91616;
-    }
+    background-color: var(--sub);
+    border-color:  var(--sub);
+    color: var(--subAlt);
 }
 
 .buttonLink {

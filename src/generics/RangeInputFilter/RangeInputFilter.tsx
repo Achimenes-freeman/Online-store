@@ -9,14 +9,14 @@ export default function RangeInputFilter({min, max, title,  changeFilters, minVa
     const [minValueState, setMinValueState] = useState(minValue);
     const [maxValueState, setMaxValueState] = useState(maxValue);
     const [fillRange, setFillRange] = useState({
-        background: `linear-gradient(to right, #dae4ff ${(minValueState / max) * 100}% , #0c75ff ${(minValueState / max) * 100}% , #0c75ff ${(maxValueState / max) * 100}%, #dae4ff ${(maxValueState / max) * 100}%)`
+        background: `linear-gradient(to right, #ffb379 ${(minValueState / max) * 100}% , #ff6f00 ${(minValueState / max) * 100}% , #ff6f00 ${(maxValueState / max) * 100}%, #ffb379 ${(maxValueState / max) * 100}%)`
     });
     useEffect(() => {
         if(minValue !== Infinity && maxValue !== Infinity) {
             setMinValueState(minValue)
             setMaxValueState(maxValue);
             setFillRange({
-                background: `linear-gradient(to right, #dae4ff ${(minValue / max) * 100}% , #0c75ff ${(minValue / max) * 100}% , #0c75ff ${(maxValue / max) * 100}%, #dae4ff ${(maxValue / max) * 100}%)`
+                background: `linear-gradient(to right, #ffb379 ${(minValue / max) * 100}% , #ff6f00 ${(minValue / max) * 100}% , #ff6f00 ${(maxValue / max) * 100}%, #ffb379 ${(maxValue / max) * 100}%)`
             })
             setCanFind(true)
         } else if(canFind) {
@@ -40,7 +40,7 @@ export default function RangeInputFilter({min, max, title,  changeFilters, minVa
             
             setMinValueState(Number(newValue));
             setFillRange({
-                background: `linear-gradient(to right, #dae4ff ${perMin}% , #0c75ff ${perMin}% , #0c75ff ${perMax}%, #dae4ff ${perMax}%)`
+                background: `linear-gradient(to right, #ffb379 ${perMin}% , #ff6f00 ${perMin}% , #ff6f00 ${perMax}%, #ffb379 ${perMax}%)`
             })
 
             changeFilters(title, [newValue, maxValueState])
@@ -61,7 +61,7 @@ export default function RangeInputFilter({min, max, title,  changeFilters, minVa
             
             setMaxValueState(newValue);
             setFillRange({
-                background: `linear-gradient(to right, #dae4ff ${perMin}% , #0c75ff ${perMin}% , #0c75ff ${perMax}%, #dae4ff ${perMax}%)`
+                background: `linear-gradient(to right, #ffb379 ${perMin}% , #ff6f00 ${perMin}% , #ff6f00 ${perMax}%, #ffb379 ${perMax}%)`
             })
 
             changeFilters(title, [minValueState, newValue])

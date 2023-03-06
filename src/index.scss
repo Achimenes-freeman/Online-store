@@ -7,6 +7,16 @@
     padding: 0;
 }
 
+:root {
+    --background: #eeeeee;
+    --main: #ff6f00;
+    --sub: #ffb379;
+    --subAlt: #3b3b3b;
+    --text: #ffffff;
+    --textAlt: #000000;
+    --error: #ff1f1f;
+}
+
 html {
     font-size: 16px;
 }

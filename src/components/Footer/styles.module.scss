@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    background-color: $white;
+    background-color: var(--text);
 }
 
 .container {
@@ -33,9 +33,9 @@
         font-size: 18px;
         transition: all 0.2s ease-in-out;
 
-        &:hover {
-            filter: drop-shadow(0 10px 3px $gray-blue-bg);
-        }
+        // &:hover {
+
+        // }
     }
 }
 
@@ -50,14 +50,14 @@
     
     &Link {
         margin-left: 2px;
-        color: $blue-bg;
+        color: var(--subAlt);
         font-weight: 600;
         text-decoration: none;
     }
 }
 
 .heading {
-    color: $gray-text;
+    color: var(--background);
     font-size: 24px;
     font-style: italic;
     font-weight: 600;
@@ -76,11 +76,11 @@
         display: block;
         padding: 5px;
         box-sizing: border-box;
-        border-radius: 20px;
+        border-radius: 10px;
         transition: all 0.2s ease-in-out;
 
         &:hover {
-            filter: drop-shadow(0 10px 3px $gray-blue-bg);
+            background: var(--background);
         }
     }
 
@@ -90,7 +90,7 @@
 }
 
 .year {
-    color: $red-bg;
+    color: var(--subAlt);
     font-size: 50px;
     font-weight: 600;
 }
