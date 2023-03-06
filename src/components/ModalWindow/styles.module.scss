@@ -23,7 +23,7 @@
     gap: 25px;
     height: 520px;
     width: 500px;
-    background: $white;
+    background: var(--background);
     border: none;
     border-radius: 15px;
 }
@@ -34,11 +34,11 @@
     justify-content: center;
     height: 40px;
     width: 100%;
-    border: 1px solid $blue-bg;
-    border-radius: 15px;
+    border: none;
+    border-radius: 10px;
     padding-left: 5px;
-    color: $black-text;
     font-size: 20px;
+    line-height: 100%;
     outline: none;
 
     &Cont {
@@ -47,14 +47,12 @@
     }
 
     &Invalid {
-        border: 1px solid $red-bg;
-        color: $red-bg;
+        color: var(--error);
     }
 
     &Valid {
-        border: 1px solid rgb(39, 250, 68);
-        color: $black-text;
-        font-style: italic;;
+        color: var(--subAlt);
+        font-weight: 600;
     }
 
     &ErrorSpan {
@@ -62,107 +60,8 @@
         top: 10px;
         right: -50px;
         cursor: default;
-        color: $red-bg;
+        color: var(--error);
         font-size: 16px;
-    }
-}
-
-.creditCardCont {
-    display: grid;
-    grid-template-areas: 
-    "cardN cardN"
-    "cardV cardC";
-    gap: 25px 0;
-    align-items: center;
-    justify-items: center;
-    height: 150px;
-    width: 85%;
-    background: rgb(12,117,255);
-    background: linear-gradient(135deg, $blue-bg 20%, $red-bg 80%);
-    border-radius: 15px;
-}
-
-.cardImg {
-    height: 35px;
-    width: 35px;
-    background-color: $white;
-    border-radius: 15px;
-}
-
-.cardNumberCont{
-    grid-area: cardN;
-    justify-self: flex-start;
-    display: flex;
-    align-self: flex-end;
-    align-items: center;
-    justify-content: space-between;
-    width: 70%;
-    gap: 5px;
-    margin-left: 25px;
-
-    & > .cardInput {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 45px;
-        width: 90%;
-        padding: 0;
-        margin: 0;
-        font-family: $montserrat;
-        font-size: 24px;
-        text-align: center;
-    }
-}
-.cardValidCont {
-    grid-area: cardV;
-    align-self: flex-start;
-    padding-left: 30px;
-    color: $white;
-    font-family: $montserrat;
-    font-size: 18px;
-    font-weight: 300;
-
-    & > .cardInput {
-        width: 50%;
-        padding: 0;
-        font-family: $montserrat;
-        font-size: 18px;
-        text-align: center;
-    }
-}
-.cardCvvCont {
-    grid-area: cardC;
-    align-self: flex-start;
-    color: $white;
-    font-family: $montserrat;
-    font-size: 18px;
-    font-weight: 300;
-
-    & > .cardInput {
-        width: 50%;
-        padding: 0;
-        font-family: $montserrat;
-        font-size: 18px;
-        text-align: center;
-    }
-}
-.cardInput {
-    height: 35px;
-    background-color: $white;
-    border: 2px solid $black-text;
-    border-radius: 15px;
-    padding-left: 5px;
-    color: $black-text;
-    font-size: 16px;
-    outline: none;
-    
-    &Invalid {
-        border-color: $red-bg;
-        color: $red-bg;
-    }
-    &Valid {
-        border-color: rgb(39, 250, 68);
-        color: $black-text;
     }
 }
 
@@ -172,10 +71,10 @@
     justify-content: center;
     height: 45px;
     width: 40%;
-    background: $blue-bg;
-    border: 1px solid $blue-bg;
-    border-radius: 15px;
-    color: $white;
+    background: var(--main);
+    border: none;
+    border-radius: 10px;
+    color: var(--text);
     cursor: pointer;
     font-family: $ubuntu;
     font-size: 20px;
@@ -184,7 +83,15 @@
     transition: 0.2s ease-in-out;
 
     &:hover {
-        transform: scale(1.03);
+        border-color: var(--subAlt);
+        background: var(--subAlt);
+        color: var(--text);
+    }
+
+    &:active {
+        background: var(--text);
+        border-color: var(--text);
+        color: var(--main);
     }
 }
 .closeModalButton {
@@ -198,7 +105,7 @@
     width: 45px;
     border: none;
     border-radius: 50%;
-    background: $red-bg;
+    background: var(--main);
     color: $white;
     cursor: pointer;
     font-size: 24px;
@@ -206,7 +113,15 @@
     transition: 0.2s ease-in-out;
 
     &:hover {
-        transform: scale(1.1);
+        border-color: var(--subAlt);
+        background: var(--subAlt);
+        color: var(--text);
+    }
+
+    &:active {
+        background: var(--text);
+        border-color: var(--text);
+        color: var(--main);
     }
 }
 

@@ -3,7 +3,7 @@
 .cardInput {
     &ErrorSpan {
         cursor: default;
-        color: $red-bg;
+        color: var(--error);
         font-size: 14px;
     }
     &ErrorCont {

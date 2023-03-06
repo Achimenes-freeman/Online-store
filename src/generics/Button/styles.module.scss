@@ -11,9 +11,9 @@
     color: $white;
     font-family: inherit;
 
-    background-color: $blue-bg;
-    border: 2px solid transparent;
-    border-radius: 1rem;
+    background-color: var(--main);
+    border: 1px solid transparent;
+    border-radius: 10px;
 
     cursor: pointer;
     transition: background-color 0.2s linear, color 0.2s linear;
@@ -23,19 +23,31 @@
     }
 
     &:hover {
-        color: $blue-bg;
-        background-color: $white;
-        border: 2px solid $blue-bg;
+        border-color: var(--subAlt);
+        background: var(--subAlt);
+        color: var(--text);
+    }
+
+    &:active {
+        background: var(--background);
+        border-color: transparent;
+        color: var(--main);
     }
 }
 .reverse {
-    color: $blue-bg;
-    background-color: $white;
-    border: 2px solid $blue-bg;
+    color: var(--subAlt);
+    background: none;
+    border: 1px solid var(--subAlt);
 
     &:hover {
-        color: $white;
-        background-color: $blue-bg;
-        border: 2px solid transparent;
+        border-color: var(--subAlt);
+        background: var(--subAlt);
+        color: var(--text);
+    }
+
+    &:active {
+        background: var(--background);
+        border-color: transparent;
+        color: var(--main);
     }
 }

@@ -25,30 +25,28 @@
 .headerLogo {
     display: flex;
     border: none;
-    filter: drop-shadow(0 10px 3px $gray-blue-bg);
     background: none;
-    color: $blue-bg;
+    color: var(--main);
     cursor: pointer;
     outline: none;
     font-size: 40px;
     font-weight: 800;
-    transition: all 0.2s ease-in-out;
 
     &Span1,
     &Span2 {
         display: block;
-        transition: all 0.2s ease-in-out;
+        transition: all 0.25s linear;
     }
 
     &Span2 {
-        color: $red-bg;
+        color: var(--subAlt);
     }
 
-    &:hover &Span1 {
-        transform: translate(65px, -16px);
+    &:hover &Span1{
+        color: var(--subAlt);
     }
-    &:hover &Span2 {
-        transform: translate(-65px, 16px);
+    &:hover &Span2{
+        color: var(--main);
     }
 }
 
@@ -58,15 +56,15 @@
     justify-content: center;
     padding: 3px;
     width: 300px;
-    border-bottom: 2px solid $gray-blue-bg;
-    color: $blue-bg;
+    border-bottom: 2px solid var(--subAlt);
+    color: var(--subAlt);
     font-size: 28px;
     font-weight: 500;
     user-select: none;
 
     &Span {
         margin-left: 10px;
-        color: $red-bg;
+        color: var(--main);
         font-weight: 600;
     }
 }

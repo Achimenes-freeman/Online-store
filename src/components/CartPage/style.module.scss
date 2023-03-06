@@ -10,20 +10,20 @@
 }
 
 .sideTitle {
-    background-color: $gray-blue-bg;
+    background-color: var(--background);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 10px 15px;
 }
 .Title {
     font-size: 1.8rem;
-    color: $black-text;
+    color: var(--subAlt);
     text-transform: capitalize;
 }
 .products {
     flex-basis: 68%;
     border-radius: 10px;
-    background-color: rgb(247, 247, 247);
+    background-color: var(--text);
 }
 
 .pagination {
@@ -52,7 +52,7 @@
         align-items: center;
         padding: 10px;
 
-        background-color: rgb(247, 247, 247);
+        background-color: var(--text);
     }
 
     &Par {
@@ -62,11 +62,11 @@
 }
 
 .blueText {
-    color: $blue-bg;
+    color: var(--subAlt);
     font-weight: 700;
 }
 .redText {
-    color: $red-bg;
+    color: var(--main);
     font-weight: 700;
 }
 
@@ -75,23 +75,23 @@
     padding: 10px 10px;
     margin-bottom: 40px;
 
-    border-radius: 100px;
-    border: 2px solid rgb(166, 166, 166);
+    border-radius: 10px;
+    border: none;
 
+    background: var(--background);
     font-size: 1.4rem;
 
     &:focus {
         outline: none;
-        border-color: $blue-bg;
 
         &::placeholder {
-            color: $blue-bg;
+            color: var(--main);
             opacity: 0.5;
         }
     }
 
     &::placeholder {
-        color: rgb(166, 166, 166);
+        color: var(--subAlt);
         opacity: 0.5;
     }
 }
