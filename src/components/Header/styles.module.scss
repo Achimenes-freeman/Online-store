@@ -88,6 +88,8 @@
 
 @media (max-width: 767px) and (min-width: 425px) {
     .container {
+        gap: 100px;
+        justify-content: center;
         width: 405px;
     }
 
