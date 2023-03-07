@@ -1,6 +1,7 @@
 @import '../../variables.scss';
 
 .CartPage {
+    align-self: flex-start;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -112,6 +113,80 @@
     font-size: 32px;
     font-weight: 300;
     text-transform: capitalize;
+}
+
+.paginationInputs {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 25px;
+    justify-content: center;
+}
+
+.limitInput {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 30px;
+    width: 40px;
+    margin: 0;
+    padding-left: 5px;
+    border: none;
+    border-radius: 10px;
+    background: var(--main);
+    color: var(--text);
+    outline: none;
+    font-family: $ubuntu;
+    font-size: 24px;
+
+    &::-webkit-inner-spin-button {
+        opacity: 1;
+        margin-right: 5px;
+        height: 30px;
+    }
+
+    &Cont {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        justify-content: center;
+        width: 150px;
+    
+        & > span {
+            width: 100%;
+            font-size: 24px;
+        }
+    }
+}
+
+.pageInputCont {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200px;
+
+    & > span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--subAlt);
+        font-size: 24px;
+    }
+}
+.pageButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    background: var(--main);
+    color: var(--text);
+    cursor: pointer;
+    font-family: $ubuntu;
+    font-size: 16px;
+    text-transform: uppercase;
 }
 
 @media (max-width: 1600px) and (min-width: 1440px) {
