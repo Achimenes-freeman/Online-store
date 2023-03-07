@@ -23,8 +23,8 @@ html {
 
 body {
     margin: 0;
-    scrollbar-gutter: stable both-edges;
     overflow-y: auto;
+    scrollbar-gutter: stable;
     font-family: $ubuntu;
 
     &::-webkit-scrollbar {
