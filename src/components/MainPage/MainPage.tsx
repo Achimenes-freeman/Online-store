@@ -9,9 +9,10 @@ import BPLink from '../../assets/icons/big-products-icon.svg';
 import ProductCardsList from '../ProductCardsList/ProductCardsList';
 
 export default function MainPage() {
+    const [isMFOpened, setIsMFOpened] = useState(false)
+
     const [products, setProducts] = useState<Product[]>();
     const [shownProducts, setShownProducts] = useState<Product[]>([]);
-
     const [filters, setFilters] = useState<FiltersType>();
     const [searchFilter, setSearchFilter] = useState<string>('');
     const [sortMethod, setSortMethod] = useState<SortMethodType>('high-rate');
@@ -231,18 +232,41 @@ export default function MainPage() {
         }
     }, [linkOfFiltersState])
 
+    const toggleMobFiltersMenu = () => {
+        if(isMFOpened) {
+            document.body.style.overflowY = 'auto'
+        } else {
+            document.body.style.overflowY = 'hidden'
+        }
+
+        setIsMFOpened(!isMFOpened)
+    }
+
     return (
         <section className={styles.MainPage}>
             {products
             ?<div className={styles.wrapper}>
-                <Filters 
+                {!!isMFOpened
+                && <div className={styles.filtersContMobile}>
+                    <Filters 
                     defaultProducts={products} 
                     filteredProducts={shownProducts}
                     getFilters={getFilters} 
                     resetFilters={resetFilters}
-                    filters={filters} 
-                />
+                    filters={filters} />
+                    <button type='button' className={styles.closeMobileFiltersButton} onClick={() => toggleMobFiltersMenu()}>X</button>
+                </div>}
+                <div className={styles.filtersCont}>
+                    <Filters 
+                        defaultProducts={products} 
+                        filteredProducts={shownProducts}
+                        getFilters={getFilters} 
+                        resetFilters={resetFilters}
+                        filters={filters} 
+                    />
+                </div>
                 <div className={styles.productsContainer}>
+                    <button type='button' className={styles.filtersMobileButton} onClick={() => toggleMobFiltersMenu()}>Filters</button>
                     <div className={styles.productsUIBar}>
                         <input 
                             className={styles.Search} 

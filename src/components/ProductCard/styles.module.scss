@@ -13,6 +13,7 @@
 }
 
 .CardCont{
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -162,4 +163,58 @@
             color: $red-bg;
         }
     }
+}
+
+@media (max-width: 767px) and (min-width: 425px) {
+    .CardCont {
+        &Small {
+            border-radius: 0;
+        }
+
+        &Big {
+            border: 1px solid var(--background);
+        }
+    }
+}
+
+@media (max-width: 424px) and (min-width: 320px) {
+    .CardCont {
+        &Small {
+            border-radius: 5px;
+            height: 100%;
+
+            & .cardImgCont {
+                width: 140px;
+                padding: 0;
+            }
+
+            & .textCont {
+                width: 140px;
+            }
+
+            .title {
+                font-size: 16px;
+            }
+
+            .description {
+                font-size: 14px;
+            }
+
+            & .buttonCont {
+                display: flex;
+                flex-direction: column;
+            }
+
+            & .buttons {
+                width: 100%;
+            }
+
+        }
+
+        &Big {
+            border: 1px solid var(--background);
+        }
+    }
+
+    
 }

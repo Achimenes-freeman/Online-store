@@ -17,3 +17,15 @@
         gap: 10px;
     }
 }
+
+@media (max-width: 424px) and (min-width: 320px) {
+    .cardInput {
+        &ErrorSpan {
+            font-size: 12px;
+        }
+            
+        &ErrorCont {
+            width: 300;
+        }
+    }
+}

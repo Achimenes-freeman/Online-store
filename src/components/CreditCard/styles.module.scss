@@ -96,3 +96,35 @@
         color: var(--subAlt);
     }
 }
+
+@media (max-width: 424px) and (min-width: 320px) {
+    .cardNumberCont {
+        gap: 10px;
+        width: 100%;
+        margin-left: 0;
+        padding: 0 10px;
+    }
+
+    .cardValidCont {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        padding-left: 10px;
+
+        & > .cardInput {
+            width: 70%;
+        }
+    }
+
+    .cardCvvCont {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        & > .cardInput {
+            width: 70%;
+        }
+    }
+}

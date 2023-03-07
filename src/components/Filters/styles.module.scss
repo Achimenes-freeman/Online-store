@@ -123,3 +123,18 @@
     margin-bottom: 20px;
 }
 
+@media (max-width: 1439px) {
+    .FiltersContainer {
+        grid-template-columns: 276px;
+        width: 276px;
+    }
+
+    .resetBut {
+        width: 60%;
+    }
+
+    .copyBut {
+        width: 30%;
+    }
+}
+
