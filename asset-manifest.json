@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Online-store/static/css/main.239c10cd.css",
-    "main.js": "/Online-store/static/js/main.2da797db.js",
+    "main.css": "/Online-store/static/css/main.7c6aab47.css",
+    "main.js": "/Online-store/static/js/main.4d1c983f.js",
     "static/media/default-card.jpg": "/Online-store/static/media/default-card.7cc292e7fedf22340c26.jpg",
     "static/media/RSSLogo-icon.svg": "/Online-store/static/media/RSSLogo-icon.dc7a206a577ba2f5bc86192b72a2cfc2.svg",
     "static/media/mir-logo.svg": "/Online-store/static/media/mir-logo.2778a8d9cbb2485bf4dddef1fab3d555.svg",
@@ -17,11 +17,11 @@
     "static/media/Rating.svg": "/Online-store/static/media/Rating.32ca46b714f0972f7aff3023637006f5.svg",
     "static/media/minus-icon.svg": "/Online-store/static/media/minus-icon.2a8b133d7e3475cc8e82847853b9d6e5.svg",
     "static/media/Category.svg": "/Online-store/static/media/Category.8469fae1fba163a43717fdca8a815c56.svg",
-    "main.239c10cd.css.map": "/Online-store/static/css/main.239c10cd.css.map",
-    "main.2da797db.js.map": "/Online-store/static/js/main.2da797db.js.map"
+    "main.7c6aab47.css.map": "/Online-store/static/css/main.7c6aab47.css.map",
+    "main.4d1c983f.js.map": "/Online-store/static/js/main.4d1c983f.js.map"
   },
   "entrypoints": [
-    "static/css/main.239c10cd.css",
-    "static/js/main.2da797db.js"
+    "static/css/main.7c6aab47.css",
+    "static/js/main.4d1c983f.js"
   ]
 }
