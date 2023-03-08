@@ -24,13 +24,15 @@
 .products {
     flex-basis: 68%;
     border-radius: 10px;
-    background-color: var(--text);
+    background-color: var(--background);
 }
 
 .pagination {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: center;
 }
 
 .input {
@@ -150,7 +152,7 @@
         align-items: center;
         gap: 5px;
         justify-content: center;
-        width: 150px;
+        width: 250px;
     
         & > span {
             width: 100%;
@@ -174,6 +176,7 @@
         font-size: 24px;
     }
 }
+
 .pageButton {
     display: flex;
     align-items: center;
@@ -249,6 +252,17 @@
     .inputPromo {
         width: 200px;
     }
+
+    .pagination {
+        margin-bottom: 20px;
+    }
+
+    .paginationInputs {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
+    }
 }
 
 @media (max-width: 424px) and (min-width: 320px) {
@@ -273,5 +287,16 @@
 
     .inputPromo {
         width: 250px;
+    }
+
+    .pagination {
+        margin-bottom: 20px;
+    }
+
+    .paginationInputs {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 10px;
     }
 }

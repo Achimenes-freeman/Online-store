@@ -105,7 +105,7 @@ function Products({ totalPrice }: ICartProducts) {
                     <h3 className={styles.Title}>Products in cart</h3>
                     <div className={styles.paginationInputs}>
                         <div className={styles.limitInputCont}>
-                            <span>Products on page:</span>
+                            <span>Items on page:</span>
                             <input className={styles.limitInput} type="number" onChange={changeLimit} value={limit} min={1} max={7}/>
                         </div>
                         <div className={styles.pageInputCont}>
@@ -136,7 +136,7 @@ function Products({ totalPrice }: ICartProducts) {
                     productsData.slice((0 + (page - 1) * limit), (limit + (page - 1) * limit)).map((item, index) => (
                         <CartProduct
                             productData={item}
-                            index={index + 1}
+                            index={index + 1 +  (limit * (page - 1))}
                             changeProductData={changeProductData}
                             key={item.id}
                         />
